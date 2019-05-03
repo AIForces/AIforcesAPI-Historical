@@ -17,19 +17,9 @@
         </a>
       </div>
 
-      <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-          Challenges
-        </a>
-        <div class="navbar-dropdown">
-          <a href=<%= challenge_new_url %> class="navbar-item">
-            New challenge
-          </a>
-          <a href=<%= challenge_index_url %> class="navbar-item">
-            All challenges
-          </a>
-        </div>
-      </div>
+      <a class="navbar-item" href=<%= rules_url %>>
+        Rules
+      </a>
 
       <div class="navbar-item has-dropdown is-hoverable">
         <a class="navbar-link">
@@ -45,8 +35,26 @@
         </div>
       </div>
 
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          Challenges
+        </a>
+        <div class="navbar-dropdown">
+          <a href=<%= challenge_new_url %> class="navbar-item">
+            New challenge
+          </a>
+          <a href=<%= challenge_index_url %> class="navbar-item">
+            All challenges
+          </a>
+        </div>
+      </div>
+
       <a class="navbar-item">
         Tournaments
+      </a>
+
+      <a class="navbar-item" href=<%= help_url %>>
+        Help
       </a>
 
       <% if current_user %>
