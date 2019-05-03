@@ -33,6 +33,10 @@ class SubmissionsController < ApplicationController
     redirect_to submissions_index_url
   end
 
+  def source
+    @needed_id = params[:id]
+  end
+
   private
     def submission_params
       params.require(:submission).permit(:compiler, :code)

@@ -15,7 +15,7 @@
         <%= subm[:id] %>
       </td>
       <td>
-        <a href=<%= submissions_make_fav_url + "?fav_id=" + subm[:id].to_s %>, >
+        <a href=<%= submissions_make_fav_url + "?fav_id=" + subm[:id].to_s %> >
             <% if current_user[:fav_id] == subm[:id] %>
             <i class="fas fa-heart"></i>
             <% else %>
@@ -30,7 +30,9 @@
         <%= subm[:status] %>
       </td>
       <td>
-        View Source
+        <a href=<%= submissions_source_url + "?id=" + subm[:id].to_s %>>
+          Get Source
+        </a>
       </td>
   <tr/>
     <% end %>
