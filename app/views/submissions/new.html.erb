@@ -1,0 +1,24 @@
+<%= form_tag submissions_create_url do %>
+  <div class="field">
+    <p class="control">
+      <span class="select">
+        <%= select :submission, :compiler, options_for_select(["Python 3.7", "GNU C++ 17", "Java"]) %>
+      </span>
+    </p>
+  </div>
+
+  <div class="field">
+    <div class="label">
+      Code
+    </div>
+    <div class="control">
+      <%= text_area :submission, :code, class: "textarea" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="control">
+      <%= submit_tag "Submit", class: "button is-link" %>
+    </div>
+  </div>
+<% end %>
