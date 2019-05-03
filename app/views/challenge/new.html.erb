@@ -1,13 +1,14 @@
 <h1 class="title">Run new challenge</h1>
 
 <%= form_tag challenge_create_url do %>
+  <% av_players = User.where.not(fav_id: nil).map{|p| p[:username]} %>
   <div class="field">
     <div class="label">
       Player 1
     </div>
     <p class="control">
       <span class="select">
-        <%= collection_select(:challenge, :sub1, Submission.all, :id, :id) %>
+        <%= select(:challenge, :sub1, av_players) %>
       </span>
     </p>
   </div>
@@ -17,7 +18,7 @@
     </div>
     <p class="control">
       <span class="select">
-        <%= collection_select(:challenge, :sub2, Submission.all, :id, :id) %>
+        <%= select(:challenge, :sub2, av_players) %>
       </span>
     </p>
   </div>

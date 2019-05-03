@@ -30,9 +30,11 @@
         <%= subm[:status] %>
       </td>
       <td>
-        <a href=<%= submissions_source_url + "?id=" + subm[:id].to_s %>>
-          Get Source
-        </a>
+        <button class="button is-link">
+          <a href=<%= submissions_source_url + "?id=" + subm[:id].to_s %>>
+            Get Source
+          </a>
+        </button>
       </td>
   <tr/>
     <% end %>

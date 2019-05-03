@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   get 'challenge/new'
   get 'challenge/show'
   get 'challenge/index'
+  get 'challenge/log'
+  get 'challenge/visualize'
   get 'event/index'
   get 'event/show'
   get 'submissions/index'
@@ -16,6 +18,7 @@ Rails.application.routes.draw do
   match "/auth" => "sessions#create", :via => :post, :as => :sessions_create
   match "/submit" => "submissions#create", :via => :post, :as => :submissions_create
   match 'challenge/create' => 'challenge#create', via: :post, as: :challenge_create
+  root :to => redirect('/login')
   resources :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

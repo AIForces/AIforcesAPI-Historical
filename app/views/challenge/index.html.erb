@@ -1,2 +1,44 @@
-<h1>Challenge#index</h1>
-<p>Find me in app/views/challenge/index.html.erb</p>
+<h1 class="title">Challenges</h1>
+
+<table class="table is-fullwidth">
+  <thead>
+    <th>ID</th>
+    <th>Player 1</th>
+    <th>Player 2</th>
+    <th>Status</th>
+    <th>Log</th>
+    <th>Visualization</th>
+  </thead>
+  <tbody>
+    <% for ch in Challenge.all %>
+    <tr>
+      <td>
+        <%= ch[:id] %>
+      </td>
+      <td>
+        <%= Submission.find_by_id(ch[:sub1]).user[:username] %>
+      </td>
+      <td>
+        <%= Submission.find_by_id(ch[:sub2]).user[:username] %>
+      </td>
+      <td>
+        <%= ch[:status] %>
+      </td>
+      <td>
+        <a href=<%= challenge_log_url + '?id=' + ch[:id].to_s %>>
+          <button class="button is-link">
+            Log
+          </button>
+        </a>
+      </td>
+      <td>
+        <a href=<%= challenge_visualize_url + '?id=' + ch[:id].to_s %>>
+          <button class="button is-link">
+            Visualizer
+          </button>
+        </a>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

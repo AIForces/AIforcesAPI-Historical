@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>AIforces</title>
+    <title>AIForces</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css" />
@@ -12,7 +12,7 @@
   <body>
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
-        <a class="navbar-item" href="#">
+        <a class="navbar-item" href="/">
           <strong>AIForces</strong>
         </a>
       </div>
@@ -44,6 +44,10 @@
           </a>
         </div>
       </div>
+
+      <a class="navbar-item">
+        Tournaments
+      </a>
 
       <% if current_user %>
         <div class="navbar-end">
