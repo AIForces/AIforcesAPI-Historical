@@ -1,5 +1,8 @@
 <%= form_tag submissions_create_url do %>
   <div class="field">
+    <div class="label">
+      Language
+    </div>
     <p class="control">
       <span class="select">
         <%= select :submission, :compiler, options_for_select(["Python 3.7", "GNU C++ 17", "Java"]) %>
