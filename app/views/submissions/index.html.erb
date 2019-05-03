@@ -1,2 +1,38 @@
-<h1>Submissions#index</h1>
-<p>Find me in app/views/submissions/index.html.erb</p>
+<h1 class="title">My submissions</h1>
+
+<table class="table is-fullwidth">
+  <thead>
+    <th>ID</th>
+    <th>FAV</th>
+    <th>Language</th>
+    <th>Status</th>
+    <th>Source</th>
+  </thead>
+  <tbody>
+    <% for subm in current_user.submissions %>
+  <tr>
+      <td>
+        <%= subm[:id] %>
+      </td>
+      <td>
+        <a href=<%= submissions_make_fav_url + "?fav_id=" + subm[:id].to_s %>, >
+            <% if current_user[:fav_id] == subm[:id] %>
+            <i class="fas fa-heart"></i>
+            <% else %>
+            <i class="far fa-heart"></i>
+            <% end %>
+        </a>
+      </td>
+      <td>
+        <%= subm[:compiler] %>
+      </td>
+      <td>
+        <%= subm[:status] %>
+      </td>
+      <td>
+        View Source
+      </td>
+  <tr/>
+    <% end %>
+  </tbody>
+</table>

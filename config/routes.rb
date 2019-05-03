@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'submissions/index'
   get 'submissions/new'
   get 'submissions/show'
+  get 'submissions/makefav', as: :submissions_make_fav
 
   get 'signup', to: "users#new", as: :users_new
   get 'login', to: 'sessions#new', as: :sessions_new
