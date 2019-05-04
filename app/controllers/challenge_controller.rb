@@ -9,17 +9,27 @@ class ChallengeController < ApplicationController
       par = challenge_params
       par[:sub1] = User.find_by_username(par[:sub1])[:fav_id]
       par[:sub2] = User.find_by_username(par[:sub2])[:fav_id]
-      Rails.logger.debug("My object: #{par.inspect}")
       @challenge = Challenge.create(par)
-      @challenge[:status] = 'PT'
+      @challenge[:status] = 'Running'
+      @challenge.player_1_verdict = 'N/A'
+      @challenge.player_2_verdict = 'N/A'
       if @challenge.save
-        redirect_to challenge_index_url
+        submission1 = Submission.find_by_id(par[:sub1])
+        submission2 = Submission.find_by_id(par[:sub2])
+        send_param = {
+            challenge_id: @challenge[:id],
+            lang1: submission1[:compiler],
+            lang2: submission2[:compiler],
+            source1: submission1[:code],
+            source2: submission2[:code]
+        }
+        redirect_to judge_send_data_url(send_param)
       end
     end
   end
 
   def log
-
+    @my_log = Challenge.find_by_id(params[:id])[:log]
   end
 
   def visualize

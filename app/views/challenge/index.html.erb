@@ -6,6 +6,9 @@
     <th>Player 1</th>
     <th>Player 2</th>
     <th>Status</th>
+    <th>P1 Verdict</th>
+    <th>P2 Verdict</th>
+    <th>Winner</th>
     <th>Log</th>
     <th>Visualization</th>
   </thead>
@@ -25,15 +28,24 @@
         <%= ch[:status] %>
       </td>
       <td>
+        <%= ch[:player_1_verdict] %>
+      </td>
+      <td>
+        <%= ch[:player_2_verdict] %>
+      </td>
+      <td>
+        <%= ch[:winner] %>
+      </td>
+      <td>
         <a href=<%= challenge_log_url + '?id=' + ch[:id].to_s %>>
-          <button class="button is-link">
+          <button class="button is-link" <%= "disabled" if ch[:status] == 'Running' %>>
             Log
           </button>
         </a>
       </td>
       <td>
         <a href=<%= challenge_visualize_url + '?id=' + ch[:id].to_s %>>
-          <button class="button is-link">
+          <button class="button is-link" <%= "disabled" if ch[:status] == 'Running' %>>
             Visualizer
           </button>
         </a>

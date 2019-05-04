@@ -1,11 +1,11 @@
 class SessionsController < ApplicationController
   def new
+    if current_user
+      redirect_to rules_url
+    end
   end
 
   def create
-    if current_user
-      redirect_to event_index_url
-    end
     user = User.find_by_username(params[:username])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
