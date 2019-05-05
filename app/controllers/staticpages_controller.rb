@@ -3,6 +3,8 @@ class StaticpagesController < ApplicationController
   end
 
   def rules
+  end
 
+  def statements
   end
 end

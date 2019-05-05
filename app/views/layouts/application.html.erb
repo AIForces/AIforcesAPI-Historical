@@ -13,48 +13,34 @@
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <a class="navbar-item" href="/">
-          <strong>AIForces</strong>
+          <h1 class="title">AIForces</h1>
         </a>
       </div>
 
       <a class="navbar-item" href=<%= rules_url %>>
-        Rules
+        Правила
       </a>
 
-      <a class="navbar-item" href=<%= rules_url %>>
-        Statements
+      <a class="navbar-item" href=<%= statements_url %>>
+        Условия
       </a>
 
-      <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-          Submissions
-        </a>
-        <div class="navbar-dropdown">
-          <a href=<%= submissions_new_url %> class="navbar-item">
-            New submission
-          </a>
-          <a href=<%= submissions_index_url %> class="navbar-item">
-            All submissions
-          </a>
-        </div>
-      </div>
+      <a href=<%= submissions_new_url %> class="navbar-item">
+        Отослать
+      </a>
 
-      <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-          Challenges
-        </a>
-        <div class="navbar-dropdown">
-          <a href=<%= challenge_new_url %> class="navbar-item">
-            New challenge
-          </a>
-          <a href=<%= challenge_index_url %> class="navbar-item">
-            All challenges
-          </a>
-        </div>
-      </div>
+      <a href=<%= submissions_index_url %> class="navbar-item">
+        Мои посылки
+      </a>
 
+      <a href=<%= challenge_new_url %> class="navbar-item">
+        Новая дуэль
+      </a>
+      <a href=<%= challenge_index_url %> class="navbar-item">
+        Мои дуэли
+      </a>
       <a class="navbar-item">
-        Tournaments
+        Турниры
       </a>
 
       <% if current_user %>
@@ -62,7 +48,7 @@
           <div class="navbar-item">
             <div class="buttons">
               <a class="button is-danger" href=<%= sessions_destroy_url %>>
-                Logout
+                Выйти
               </a>
             </div>
           </div>
@@ -72,10 +58,10 @@
         <div class="navbar-item">
           <div class="buttons">
             <a class="button is-primary" href=<%= users_new_url %>>
-              <strong>Sign up</strong>
+              <strong>Регистрация</strong>
             </a>
             <a class="button is-light" href=<%= sessions_new_url %>>
-              Log in
+              Вход
             </a>
           </div>
         </div>

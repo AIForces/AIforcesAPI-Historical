@@ -13,7 +13,7 @@
 
   <div class="field">
     <div class="label">
-      <%= form.label :username %>
+      <%= form.label "Имя пользователя" %>
     </div>
     <div class="control">
       <%= form.text_field :username, class: "input" %>
@@ -22,7 +22,7 @@
 
   <div class="field">
     <div class="label">
-      <%= form.label :password %>
+      <%= form.label "Пароль" %>
     </div>
     <div class="control">
       <%= form.password_field :password, class: "input" %>
@@ -31,7 +31,7 @@
 
   <div class="field">
     <div class="label">
-      <%= form.label :password_confirmation %>
+      <%= form.label "Подтверждение пароля" %>
     </div>
     <div class="control">
       <%= form.password_field :password_confirmation, class: "input" %>
@@ -39,6 +39,6 @@
   </div>
 
   <div class="control">
-    <%= form.submit class: "button is-link" %>
+    <%= form.submit "Зарегестрироваться", class: "button is-link" %>
   </div>
 <% end %>

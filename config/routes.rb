@@ -21,6 +21,7 @@ Rails.application.routes.draw do
 
   get 'help', to: 'staticpages#help'
   get 'rules', to: 'staticpages#rules'
+  get 'statements', to: 'staticpages#statements'
 
   get 'signup', to: "users#new", as: :users_new
   get 'login', to: 'sessions#new', as: :sessions_new

@@ -1,12 +1,13 @@
-<h1 class="title">My submissions</h1>
+<h1 class="title">Мои посылки</h1>
 
 <table class="table is-fullwidth">
   <thead>
     <th>ID</th>
-    <th>FAV</th>
-    <th>Language</th>
-    <th>Status</th>
-    <th>Source</th>
+    <th>Дуэль</th>
+    <th>Турнир</th>
+    <th>Язык</th>
+    <th>Статус</th>
+    <th>Исходный код</th>
   </thead>
   <tbody>
     <% for subm in current_user.submissions %>
@@ -15,6 +16,15 @@
         <%= subm[:id] %>
       </td>
       <td>
+        <a href=<%= submissions_make_fav_url + "?fav_id=" + subm[:id].to_s %> >
+            <% if current_user[:fav_id] == subm[:id] %>
+            <i class="fas fa-heart"></i>
+            <% else %>
+            <i class="far fa-heart"></i>
+            <% end %>
+        </a>
+      </td>
+    <td>
         <a href=<%= submissions_make_fav_url + "?fav_id=" + subm[:id].to_s %> >
             <% if current_user[:fav_id] == subm[:id] %>
             <i class="fas fa-heart"></i>
@@ -32,7 +42,7 @@
       <td>
         <button class="button is-link">
           <a href=<%= submissions_source_url + "?id=" + subm[:id].to_s %>>
-            Get Source
+            Просмотреть
           </a>
         </button>
       </td>

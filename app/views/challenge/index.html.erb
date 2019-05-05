@@ -1,16 +1,16 @@
-<h1 class="title">Challenges</h1>
+<h1 class="title">Мои дуэли</h1>
 
 <table class="table is-fullwidth">
   <thead>
     <th>ID</th>
-    <th>Player 1</th>
-    <th>Player 2</th>
-    <th>Status</th>
-    <th>P1 Verdict</th>
-    <th>P2 Verdict</th>
-    <th>Winner</th>
+    <th>Игрок 1</th>
+    <th>Игрок 2</th>
+    <th>Стаус</th>
+    <th>P1 Вердикт</th>
+    <th>P2 Вердикт</th>
+    <th>Победитель</th>
     <th>Log</th>
-    <th>Visualization</th>
+    <th>Визулизация</th>
   </thead>
   <tbody>
     <% for ch in Challenge.all %>
@@ -46,7 +46,7 @@
       <td>
         <a href=<%= challenge_visualize_url + '?id=' + ch[:id].to_s %>>
           <button class="button is-link" <%= "disabled" if ch[:status] == 'Running' %>>
-            Visualizer
+            Визуализация
           </button>
         </a>
       </td>

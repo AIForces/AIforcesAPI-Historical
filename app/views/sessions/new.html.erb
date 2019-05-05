@@ -1,4 +1,4 @@
-<h1 class="title">Login</h1>
+<h1 class="title">Вход</h1>
 
 <div class="level">
   <div class="level-left">
@@ -6,7 +6,7 @@
 
       <div class="field">
         <div class="label">
-          <%= label_tag :username %>
+          <%= label_tag "Имя пользователя" %>
         </div>
         <div class="control">
           <%= text_field :username, "", class: "input" %>
@@ -15,7 +15,7 @@
 
       <div class=”field”>
         <div class="label">
-          <%= label_tag :password %>
+          <%= label_tag "Пароль" %>
         </div>
         <div class="control">
           <%= password_field_tag :password, "", class: "input" %>
@@ -23,7 +23,7 @@
       </div>
       <br/>
       <div class=”control”>
-        <%= submit_tag 'Login', class: "button is-link" %>
+        <%= submit_tag 'Войти', class: "button is-link" %>
       </div>
     <% end %>
   </div>

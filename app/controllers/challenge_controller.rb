@@ -1,5 +1,8 @@
 class ChallengeController < ApplicationController
   def new
+    if current_user == nil
+      redirect_to sessions_new_url
+    end
   end
 
   def create
@@ -37,6 +40,9 @@ class ChallengeController < ApplicationController
   end
 
   def index
+    if current_user == nil
+      redirect_to sessions_new_url
+    end
   end
 
   private
