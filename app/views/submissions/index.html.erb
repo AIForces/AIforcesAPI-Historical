@@ -16,22 +16,40 @@
         <%= subm[:id] %>
       </td>
       <td>
-        <a href=<%= submissions_make_fav_url + "?fav_id=" + subm[:id].to_s %> >
-            <% if current_user[:fav_id] == subm[:id] %>
-            <i class="fas fa-heart"></i>
+        <% b_name = "ch_but#{subm.id}" %>
+        <a class="ch_but" id=<%= b_name %>>
+            <% if current_user[:fav_ch_id] == subm.id %>
+              <i class="fas fa-heart"></i>
             <% else %>
-            <i class="far fa-heart"></i>
+              <i class="far fa-heart"></i>
             <% end %>
         </a>
+        <script>
+          $("#<%= b_name %>").click(function () {
+              $.get("<%= submissions_make_used_for_ch_url %>", {id: <%= subm.id %>}, function() {
+                  $(".ch_but").html("<i class=\"far fa-heart\"></i>")
+                  $("#<%= b_name %>").html("<i class=\"fas fa-heart\"></i>")
+              })
+          })
+        </script>
       </td>
     <td>
-        <a href=<%= submissions_make_fav_url + "?fav_id=" + subm[:id].to_s %> >
-            <% if current_user[:fav_id] == subm[:id] %>
-            <i class="fas fa-heart"></i>
-            <% else %>
-            <i class="far fa-heart"></i>
-            <% end %>
-        </a>
+      <% b_name = "tour_but#{subm.id}" %>
+      <a class="tour_but" id=<%= b_name %>>
+        <% if current_user[:fav_tours_id] == subm.id %>
+          <i class="fas fa-heart"></i>
+        <% else %>
+          <i class="far fa-heart"></i>
+        <% end %>
+      </a>
+      <script>
+          $("#<%= b_name %>").click(function () {
+              $.get("<%= submissions_make_used_for_tours_url %>", {id: <%= subm.id %>}, function() {
+                  $(".tour_but").html("<i class=\"far fa-heart\"></i>")
+                  $("#<%= b_name %>").html("<i class=\"fas fa-heart\"></i>")
+              })
+          })
+      </script>
       </td>
       <td>
         <%= subm[:compiler] %>

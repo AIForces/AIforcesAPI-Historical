@@ -10,15 +10,10 @@ class ChallengeController < ApplicationController
       redirect_to sessions_new_url
     else
       par = challenge_params
-      par[:sub1] = User.find_by_username(par[:sub1])[:fav_id]
-      par[:sub2] = User.find_by_username(par[:sub2])[:fav_id]
-      @challenge = Challenge.create(par)
-      @challenge[:status] = 'Running'
-      @challenge.player_1_verdict = 'N/A'
-      @challenge.player_2_verdict = 'N/A'
+      submission1 = Submission.find_by_name(par[:sub1])
+      submission2 = Submission.find_by_name(par[:sub2])
+      @challenge = Challenge.create(sub1: submission1.id, sub2: submission2.id, status: "Running", player_1_verdict: "N/A", player_2_verdict: "N/A")
       if @challenge.save
-        submission1 = Submission.find_by_id(par[:sub1])
-        submission2 = Submission.find_by_id(par[:sub2])
         send_param = {
             challenge_id: @challenge[:id],
             lang1: submission1[:compiler],

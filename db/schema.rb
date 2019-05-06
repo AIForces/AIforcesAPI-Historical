@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_04_093856) do
+ActiveRecord::Schema.define(version: 2019_05_05_193728) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,9 @@ ActiveRecord::Schema.define(version: 2019_05_04_093856) do
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.string "status"
+    t.string "name"
+    t.boolean "used_for_ch"
+    t.boolean "used_for_tours"
     t.index ["user_id"], name: "index_submissions_on_user_id"
   end
 
@@ -42,8 +45,9 @@ ActiveRecord::Schema.define(version: 2019_05_04_093856) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "fav_id"
     t.integer "rating"
+    t.integer "fav_ch_id"
+    t.integer "fav_tours_id"
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 

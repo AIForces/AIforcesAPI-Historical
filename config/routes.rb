@@ -15,7 +15,8 @@ Rails.application.routes.draw do
   get 'submissions/index'
   get 'submissions/new'
   get 'submissions/show'
-  get 'submissions/makefav', as: :submissions_make_fav
+  get 'submissions/make_used_for_ch'
+  get 'submissions/make_used_for_tours'
   get 'submissions/source'
   match "/submit" => "submissions#create", :via => :post, :as => :submissions_create
 

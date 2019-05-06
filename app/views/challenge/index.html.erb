@@ -19,10 +19,10 @@
         <%= ch[:id] %>
       </td>
       <td>
-        <%= Submission.find_by_id(ch[:sub1]).user[:username] %>
+        <%= Submission.find_by_id(ch[:sub1]).name %>
       </td>
       <td>
-        <%= Submission.find_by_id(ch[:sub2]).user[:username] %>
+        <%= Submission.find_by_id(ch[:sub2]).name %>
       </td>
       <td>
         <%= ch[:status] %>
