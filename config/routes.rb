@@ -20,6 +20,11 @@ Rails.application.routes.draw do
   get 'submissions/source'
   match "/submit" => "submissions#create", :via => :post, :as => :submissions_create
 
+  get 'tournament/index'
+  get 'tournament/show'
+  get 'tournament/new'
+  match "tournament/create" => "tournament#create", :via => :post, :as => :tournament_create
+
   get 'help', to: 'staticpages#help'
   get 'rules', to: 'staticpages#rules'
   get 'statements', to: 'staticpages#statements'

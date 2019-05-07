@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_05_193728) do
+ActiveRecord::Schema.define(version: 2019_05_07_132521) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(version: 2019_05_05_193728) do
     t.string "player_2_verdict"
     t.string "winner"
     t.string "status"
+    t.bigint "tournament_id"
+    t.index ["tournament_id"], name: "index_challenges_on_tournament_id"
   end
 
   create_table "submissions", force: :cascade do |t|
@@ -40,6 +42,14 @@ ActiveRecord::Schema.define(version: 2019_05_05_193728) do
     t.index ["user_id"], name: "index_submissions_on_user_id"
   end
 
+  create_table "tournaments", force: :cascade do |t|
+    t.string "name"
+    t.integer "number_of_ch_per_pair"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "participants"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
@@ -48,6 +58,7 @@ ActiveRecord::Schema.define(version: 2019_05_05_193728) do
     t.integer "rating"
     t.integer "fav_ch_id"
     t.integer "fav_tours_id"
+    t.string "role"
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 

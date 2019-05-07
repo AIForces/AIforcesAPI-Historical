@@ -13,7 +13,7 @@
     <th>Визулизация</th>
   </thead>
   <tbody>
-    <% for ch in Challenge.all %>
+    <% for ch in Challenge.where(tournament: nil) %>
     <tr>
       <td>
         <%= ch[:id] %>
