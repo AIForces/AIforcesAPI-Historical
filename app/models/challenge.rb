@@ -4,12 +4,14 @@ class Challenge < ApplicationRecord
   belongs_to :tournament, optional: true
 
   after_create :fill_default_vals
-  after_save :send_challenge
+  after_create :send_challenge
 
   def fill_default_vals
     self.status = "Running"
     self.player_1_verdict = "N/A"
     self.player_2_verdict = "N/A"
+    self.player1_id = Submission.find(self.sub1).user.id
+    self.player2_id = Submission.find(self.sub2).user.id
   end
 
   def send_challenge

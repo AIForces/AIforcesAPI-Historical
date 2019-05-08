@@ -1,5 +1,6 @@
 class TournamentController < ApplicationController
   skip_before_action :verify_authenticity_token
+  before_action :set_tournament, only: [:show]
 
   def index
 
@@ -33,5 +34,9 @@ class TournamentController < ApplicationController
 
   def tournament_params
     params.permit(:name, :number_of_ch_per_pair)
+  end
+
+  def set_tournament
+    @tournament = Tournament.find(params[:id])
   end
 end

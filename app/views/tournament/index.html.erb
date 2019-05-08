@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<h1 class="title">Турниры</h1>
 
-</body>
-</html>
+<div class="content">
+  <ul>
+    <% Tournament.all.each do |t| %>
+      <li><a href=<%= tournament_show_url + "?id=#{t.id}" %>><%= t.name %></a> </li>
+    <% end %>
+  </ul>
+</div>
