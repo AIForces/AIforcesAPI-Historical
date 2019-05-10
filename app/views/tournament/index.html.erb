@@ -1,9 +1,4 @@
 <h1 class="title">Турниры</h1>
-
-<div class="content">
-  <ul>
-    <% Tournament.all.each do |t| %>
-      <li><a href=<%= tournament_show_url + "?id=#{t.id}" %>><%= t.name %></a> </li>
-    <% end %>
-  </ul>
-</div>
+<% Tournament.all.each do |t| %>
+    <p class="section"><a class = "button is-primary" href=<%= tournament_show_url + "?id=#{t.id}" %>><%= t.name %></a></p>
+<% end %>

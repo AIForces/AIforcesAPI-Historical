@@ -1,4 +1,6 @@
 class SubmissionsController < ApplicationController
+  before_action :set_submission, only: [:source]
+
   def index
   end
 
@@ -68,5 +70,9 @@ class SubmissionsController < ApplicationController
   private
     def submission_params
       params.require(:submission).permit(:compiler, :code)
+    end
+
+    def set_submission
+      @submission = Submission.find(params[:id])
     end
 end

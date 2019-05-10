@@ -1,5 +1,14 @@
-<h1 class="title">Турнирная таблица</h1>
+<h1 class="title"><%= @tournament.name %></h1>
+<div class="notification is-info">
+  Количество партий в каждой встрече: <%= @tournament.number_of_ch_per_pair %>
+  <br/>
+  Статус: <%= @tournament.get_status %>
+</div>
+<h1 class="title is-4">Турнирная таблица</h1>
+<p>
 В каждой строке описывается первый игрок. Приводится его число побед, ничей и поражений через запятую.
+</p>
+<br/>
 <table class="table is-bordered is-fullwidth">
   <tbody>
     <tr>
@@ -24,7 +33,7 @@
   </tbody>
 </table>
 
-<h1 class="title">Рейтинг участников</h1>
+<h1 class="title is-4">Рейтинг участников</h1>
 <table class="table is-bordered is-fullwidth">
   <thead>
     <td>#</td>

@@ -17,6 +17,17 @@ class Tournament < ApplicationRecord
     resp.sort_by { |id, rating| rating}.reverse
   end
 
+  def get_status
+    done_cnt = self.challenges.where(status: "Finished").count
+    all_cnt = self.challenges.count
+    if done_cnt < all_cnt
+      status = 'Проводится'
+    else
+      status = 'Закончен'
+    end
+    "#{status}. Проведено #{done_cnt} поединков из #{all_cnt}"
+  end
+
   def get_info_for_table (player1, player2)
     all_games = self.challenges.where(player1_id: player1, player2_id: player2)
     w1 = all_games.where(winner_id: player1).count
