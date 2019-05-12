@@ -2,64 +2,48 @@
 
 <table class="table is-fullwidth">
   <thead>
-    <th>ID</th>
-    <th>Дуэль</th>
-    <th>Турнир</th>
-    <th>Язык</th>
-    <th>Статус</th>
-    <th>Исходный код</th>
+    <tr>
+      <th>ID</th>
+      <th>Дуэль</th>
+      <th>Турнир</th>
+      <th>Язык</th>
+      <th>Статус</th>
+      <th>Исходный код</th>
+    </tr>
   </thead>
   <tbody>
-    <% for subm in current_user.submissions %>
+    <% current_user.submissions.each do |submission| %>
   <tr>
       <td>
-        <%= subm[:id] %>
+        <%= submission[:id] %>
       </td>
       <td>
-        <% b_name = "ch_but#{subm.id}" %>
-        <a class="ch_but" id=<%= b_name %>>
-            <% if current_user[:fav_ch_id] == subm.id %>
+        <a class="ch_but" id=<%= "ch_but_#{submission.id}" %>>
+            <% if current_user[:fav_ch_id] == submission.id %>
               <i class="fas fa-heart"></i>
             <% else %>
               <i class="far fa-heart"></i>
             <% end %>
         </a>
-        <script>
-          $("#<%= b_name %>").click(function () {
-              $.get("<%= submissions_make_used_for_ch_url %>", {id: <%= subm.id %>}, function() {
-                  $(".ch_but").html("<i class=\"far fa-heart\"></i>")
-                  $("#<%= b_name %>").html("<i class=\"fas fa-heart\"></i>")
-              })
-          })
-        </script>
       </td>
     <td>
-      <% b_name = "tour_but#{subm.id}" %>
-      <a class="tour_but" id=<%= b_name %>>
-        <% if current_user[:fav_tours_id] == subm.id %>
+      <a class="tour_but" id=<%= "tour_but_#{submission.id}" %>>
+        <% if current_user[:fav_tours_id] == submission.id %>
           <i class="fas fa-heart"></i>
         <% else %>
           <i class="far fa-heart"></i>
         <% end %>
       </a>
-      <script>
-          $("#<%= b_name %>").click(function () {
-              $.get("<%= submissions_make_used_for_tours_url %>", {id: <%= subm.id %>}, function() {
-                  $(".tour_but").html("<i class=\"far fa-heart\"></i>")
-                  $("#<%= b_name %>").html("<i class=\"fas fa-heart\"></i>")
-              })
-          })
-      </script>
       </td>
       <td>
-        <%= subm[:compiler] %>
+        <%= submission[:compiler] %>
       </td>
       <td>
-        <%= subm[:status] %>
+        <%= submission[:status] %>
       </td>
       <td>
         <button class="button is-link">
-          <a href=<%= submissions_source_url + "?id=" + subm[:id].to_s %>>
+          <a href=<%= submissions_source_url + "?id=" + submission[:id].to_s %>>
             Просмотреть
           </a>
         </button>
@@ -68,3 +52,23 @@
     <% end %>
   </tbody>
 </table>
+
+<script>
+    $(".ch_but").click(function (event) {
+        let target_id = event.target.parentElement.id;
+        let id = parseInt(target_id.slice("ch_but_".length));
+        $.get("<%= submissions_make_used_for_ch_url %>", {id: id}, function() {
+            $(".ch_but").html("<i class=\"far fa-heart\"></i>");
+            $("#" + target_id).html("<i class=\"fas fa-heart\"></i>")
+        })
+    });
+
+    $(".tour_but").click(function (event) {
+        let target_id = event.target.parentElement.id;
+        let id = parseInt(target_id.slice("tour_but_".length));
+        $.get("<%= submissions_make_used_for_tours_url %>", {id: id}, function() {
+            $(".tour_but").html("<i class=\"far fa-heart\"></i>");
+            $("#" + target_id).html("<i class=\"fas fa-heart\"></i>")
+        })
+    })
+</script>

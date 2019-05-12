@@ -37,7 +37,7 @@ class SubmissionsController < ApplicationController
 
   def make_used_for_ch
     new_fav_id = params[:id]
-    if not current_user.fav_ch_id.nil?
+    unless current_user.fav_ch_id.nil?
       last_subm = Submission.find_by_id current_user.fav_ch_id
       last_subm.used_for_ch = nil
       last_subm.save
