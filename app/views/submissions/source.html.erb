@@ -2,7 +2,6 @@
 <div class="content">
   <pre><code class="hljs"><%= (current_user.submissions.find_by_id @needed_id)[:code] %></code></pre>
 </div>
-
 <script>
     $(document).ready(function() {
         $('pre code').each(function(i, e) {hljs.highlightBlock(e)});

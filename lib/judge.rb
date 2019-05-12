@@ -6,7 +6,6 @@ module Judge
     cur_challenge.log = par[:log]
     cur_challenge.player_1_verdict = par[:player1_verdict]
     cur_challenge.player_2_verdict = par[:player2_verdict]
-    # Piece of shit
     if par[:winner] == 0
       cur_challenge.winner = cur_challenge.sub1
       cur_challenge.winner_id = Submission.find(cur_challenge.sub1).user.id
@@ -29,6 +28,5 @@ module Judge
     res = Net::HTTP.start(uri.hostname, uri.port) do |http|
       http.request(req)
     end
-    Rails.logger.debug("Result of save: #{res.inspect}")
   end
 end
