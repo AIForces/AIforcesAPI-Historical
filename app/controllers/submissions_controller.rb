@@ -6,8 +6,6 @@ class SubmissionsController < ApplicationController
       redirect_to sessions_new_url
     else
       @submission = current_user.submissions.create(submission_params)
-      @submission[:status] = 'Running'
-      @submission[:name] = "#{@submission.user.username}. ID:#{@submission.id}"
       if @submission.save
         redirect_to submissions_index_url
       end

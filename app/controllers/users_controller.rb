@@ -5,10 +5,16 @@ class UsersController < ApplicationController
   end
 
   def create
+    if params.empty?
+      render 'users/new'
+    end
     @user = User.new(user_params)
     @user.role = 'user'
-    @user.save
-    redirect_to sessions_new_url
+    if @user.save
+      redirect_to sessions_new_url
+    else
+      redirect_to users_new_url, notice: @user.errors.full_messages
+    end
   end
 
   private
@@ -23,6 +29,6 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:username, :password, :password_confirmation)
+      params.require(:user).permit(:username, :name, :surname, :password, :password_confirmation)
     end
 end

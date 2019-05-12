@@ -1,14 +1,13 @@
 <h1 class="title">Новая дуэль</h1>
 
 <%= form_tag challenge_create_url do %>
-  <% av_submissions = Submission.where(["used_for_ch = true or user_id = ?", current_user.id]).pluck(:name) %>
   <div class="field">
     <div class="label">
       Игрок 1
     </div>
     <p class="control">
       <span class="select">
-        <%= select(:challenge, :sub1, av_submissions) %>
+        <%= select(:challenge, :sub1, (current_user.get_av_submissions).pluck(:name)) %>
       </span>
     </p>
   </div>
@@ -18,7 +17,7 @@
     </div>
     <p class="control">
       <span class="select">
-        <%= select(:challenge, :sub2, av_submissions) %>
+        <%= select(:challenge, :sub2, (current_user.get_av_submissions).pluck(:name)) %>
       </span>
     </p>
   </div>

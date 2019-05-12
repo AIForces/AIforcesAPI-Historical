@@ -1,21 +1,24 @@
 <h1 class="title">Регистрация</h1>
 
 <% if Setting.registration_open %>
+
+  <% if notice.respond_to? :each %>
+    <div class="notification is-danger">
+      <div class="content">
+        Пожалуйста, исправьте следующие ошибки:
+        <ul>
+          <% notice.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
   <div class="level">
     <div class="level-left">
 
-      <%= form_with(model: @user, local: true) do |form| %>
-        <% if @user.errors.any? %>
-          <div class="notification is-danger">
-            <h1><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h1>
-
-            <ul>
-              <% user.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-              <% end %>
-            </ul>
-          </div>
-        <% end %>
+      <%= form_with(url: "/users/create", model: @user, local: true) do |form| %>
 
         <div class="field">
           <div class="label">
@@ -31,7 +34,7 @@
             <%= form.label "Имя" %>
           </div>
           <div class="control">
-            <%= form.text_field :surname, class: "input" %>
+            <%= form.text_field :name, class: "input" %>
           </div>
         </div>
 

@@ -17,6 +17,6 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
-    redirect_to sessions_new_url, notice: "Logged out"
+    redirect_to sessions_new_url
   end
 end

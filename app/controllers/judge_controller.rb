@@ -6,10 +6,11 @@ class JudgeController < ApplicationController
   include Judge
 
   def receive_data
-    unless Setting.judges_endpoints.include? request.remote_ip
+    if Setting.trusted_ips.include? request.remote_ip
+      save_data_from_judge rec_params
+    else
       head :forbidden
     end
-    save_data_from_judge rec_params
   end
 
   private
