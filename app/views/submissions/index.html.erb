@@ -12,44 +12,44 @@
     </tr>
   </thead>
   <tbody>
-    <% current_user.submissions.each do |submission| %>
-  <tr>
-      <td>
-        <%= submission[:id] %>
-      </td>
-      <td>
-        <a class="ch_but" id=<%= "ch_but_#{submission.id}" %>>
-            <% if current_user[:fav_ch_id] == submission.id %>
-              <i class="fas fa-heart"></i>
-            <% else %>
-              <i class="far fa-heart"></i>
-            <% end %>
-        </a>
-      </td>
-    <td>
-      <a class="tour_but" id=<%= "tour_but_#{submission.id}" %>>
-        <% if current_user[:fav_tours_id] == submission.id %>
-          <i class="fas fa-heart"></i>
-        <% else %>
-          <i class="far fa-heart"></i>
-        <% end %>
-      </a>
-      </td>
-      <td>
-        <%= submission[:compiler] %>
-      </td>
-      <td>
-        <%= submission[:status] %>
-      </td>
-      <td>
-        <button class="button is-link">
-          <a href=<%= submissions_source_url + "?id=" + submission[:id].to_s %>>
-            Просмотреть
+  <% current_user.submissions.each do |submission| %>
+    <tr>
+        <td>
+          <%= submission[:id] %>
+        </td>
+        <td>
+          <a class="ch_but" id=<%= "ch_but_#{submission.id}" %>>
+              <% if current_user[:fav_ch_id] == submission.id %>
+                <i class="fas fa-heart"></i>
+              <% else %>
+                <i class="far fa-heart"></i>
+              <% end %>
           </a>
-        </button>
-      </td>
-  <tr/>
-    <% end %>
+        </td>
+      <td>
+        <a class="tour_but" id=<%= "tour_but_#{submission.id}" %>>
+          <% if current_user[:fav_tours_id] == submission.id %>
+            <i class="fas fa-heart"></i>
+          <% else %>
+            <i class="far fa-heart"></i>
+          <% end %>
+        </a>
+        </td>
+        <td>
+          <%= submission[:compiler] %>
+        </td>
+        <td>
+          <%= submission[:status] %>
+        </td>
+        <td>
+          <button class="button is-link">
+            <a href=<%= submissions_source_url + "?id=" + submission[:id].to_s %>>
+              Просмотреть
+            </a>
+          </button>
+        </td>
+    </tr>
+  <% end %>
   </tbody>
 </table>
 

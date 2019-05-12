@@ -1,9 +1,6 @@
 class SubmissionsController < ApplicationController
   before_action :set_submission, only: [:source]
 
-  def index
-  end
-
   def create
     if current_user == nil
       redirect_to sessions_new_url
