@@ -37,8 +37,7 @@ class SubmissionsController < ApplicationController
       last_subm.used_for_ch = nil
       last_subm.save
     end
-    current_user.fav_ch_id = new_fav_id
-    current_user.save
+    current_user.update!(fav_ch_id: new_fav_id)
     cur_subm = Submission.find_by_id(params[:id])
     cur_subm.used_for_ch = true
     cur_subm.save
@@ -51,8 +50,7 @@ class SubmissionsController < ApplicationController
       last_subm.used_for_tours = nil
       last_subm.save
     end
-    current_user.fav_tours_id = new_fav_id
-    current_user.save
+    current_user.update(fav_tours_id: new_fav_id)
     cur_subm = Submission.find_by_id(params[:id])
     cur_subm.used_for_tours = true
     cur_subm.save

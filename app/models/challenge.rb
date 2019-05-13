@@ -1,11 +1,13 @@
 class MyChallengeValidator < ActiveModel::Validator
   def validate(challenge)
-    permitted = challenge.user.get_av_submissions.pluck(:id)
-    unless permitted.include? challenge.sub1
-      record.errors[:sub1] << 'Submission 1 is not permitted'
-    end
-    unless permitted.include? challenge.sub2
-      record.errors[:sub2] << 'Submission 2 is not permitted'
+    if challenge.tournament.nil?
+      permitted = challenge.user.get_av_submissions.pluck(:id)
+      unless permitted.include? challenge.sub1
+        record.errors[:sub1] << 'Submission 1 is not permitted'
+      end
+      unless permitted.include? challenge.sub2
+        record.errors[:sub2] << 'Submission 2 is not permitted'
+      end
     end
   end
 end
@@ -16,6 +18,7 @@ class Challenge < ApplicationRecord
   default_scope { order(id: :desc) }
   belongs_to :tournament, optional: true
   belongs_to :user, optional: true
+  serialize :log
   validates_with MyChallengeValidator
 
   after_create :init
@@ -37,7 +40,8 @@ class Challenge < ApplicationRecord
         lang1: submission1[:compiler],
         lang2: submission2[:compiler],
         source1: submission1[:code],
-        source2: submission2[:code]
+        source2: submission2[:code],
+        game: "tron"
     }
     send_data_to_judge send_param
   end

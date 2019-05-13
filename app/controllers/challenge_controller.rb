@@ -1,3 +1,4 @@
+require 'json'
 class ChallengeController < ApplicationController
   include Judge
   before_action :set_challenge, only: [:log, :visualize]
@@ -18,7 +19,7 @@ class ChallengeController < ApplicationController
 
   def log
     my_log = Challenge.find_by_id(params[:id])[:log]
-    send_data my_log, filename: "Challenge #{@challenge.id} log.json", type: "application/json"
+    send_data my_log.to_json, filename: "Challenge #{@challenge.id} log.json", type: "application/json"
   end
 
   def visualize
@@ -26,7 +27,7 @@ class ChallengeController < ApplicationController
   end
 
   def index
-    challenges = Challenge.where(tournament: nil)
+    challenges = Challenge.where(tournament: nil, user_id: current_user.id)
     @challenges_data = challenges.map { |x|
       cur_item = {
           id: x.id,
@@ -36,7 +37,11 @@ class ChallengeController < ApplicationController
           player2_verdict: x.player_2_verdict,
       }
       if x.winner.nil?
-        cur_item[:winner] = 'N/A'
+        if x.is_draw
+          cur_item[:winner] = 'Draw'
+        else
+          cur_item[:winner] = 'N/A'
+        end
       else
         cur_item[:winner] = Submission.find(x.winner).name
       end
