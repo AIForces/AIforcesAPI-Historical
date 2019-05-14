@@ -1,0 +1,78 @@
+<script>
+    let my_log;
+    let current_frame = 0;
+    let is_playing = 0;
+    let timer_id;
+
+    function update() {
+        if (is_playing) {
+            timer_id = setInterval(to_next_frame, 100);
+            $("#play_button").html("<i class=\"fas fa-pause\"></i>")
+        } else {
+            $("#play_button").html("<i class=\"fas fa-play\">");
+            clearInterval(timer_id)
+        }
+    }
+    $(document).ready(function() {
+        $.getJSON("<%= "#{challenge_log_url}?id=#{@id}&format=json"%>", function (data) {
+            my_log = data;
+            redraw();
+            $("#play_button").click(function () {
+                is_playing ^= 1;
+                update()
+            });
+
+            $("#repeat_button").click(function () {
+                current_frame = 0;
+                is_playing = 0;
+                update()
+                redraw()
+            })
+        });
+    });
+
+    function to_next_frame() {
+        if (current_frame + 1 == my_log.length) {
+            clearInterval(timer_id);
+            return;
+        }
+        current_frame++;
+        redraw();
+    }
+
+    function redraw() {
+        class_mapper = {
+            0: "empty",
+            1: "red",
+            2: "red_tail",
+            3: "blue",
+            4: "blue_tail"
+        };
+        for(let i = 0; i < 10; i++) {
+            for (let j = 0; j < 10; j++) {
+                let cur_class = class_mapper[my_log[current_frame]["field"][i][j]];
+                $("#board_" + i + "_" + j).attr("class", "square " + cur_class)
+            }
+        }
+    }
+</script>
+
+<div class="columns">
+  <div class="column">
+    <button id="play_button" class="button"><i class="fas fa-play"></i></button>
+    <button id="repeat_button" class="button"><i class="fas fa-redo"></i></button>
+    <br/>
+
+  </div>
+  <div class="column is-two-thirds">
+    <div class="board">
+      <% 10.times do |i|%>
+        <% 10.times do |j|%>
+          <div id="<%= "board_#{i}_#{j}" %>" class="square">
+
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -19,11 +19,14 @@ class ChallengeController < ApplicationController
 
   def log
     my_log = Challenge.find_by_id(params[:id])[:log]
-    send_data my_log.to_json, filename: "Challenge #{@challenge.id} log.json", type: "application/json"
+    respond_to do |format|
+      format.html { (send_data my_log.to_json, filename: "Challenge #{@challenge.id} log.json", type: "application/json") }
+      format.json { render json: my_log }
+    end
   end
 
   def visualize
-
+    @id = params[:id]
   end
 
   def index
