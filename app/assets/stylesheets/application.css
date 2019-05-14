@@ -23,7 +23,7 @@
 .board {
     height: 640px;
     width: 640px;
-    margin: 20px;
+    /*margin: 20px;*/
     border: 15px solid #333;
 }
 

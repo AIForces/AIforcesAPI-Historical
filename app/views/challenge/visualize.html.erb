@@ -32,7 +32,7 @@
     });
 
     function to_next_frame() {
-        if (current_frame + 1 == my_log.length) {
+        if (current_frame + 1 == my_log.lengtd) {
             clearInterval(timer_id);
             return;
         }
@@ -54,25 +54,81 @@
                 $("#board_" + i + "_" + j).attr("class", "square " + cur_class)
             }
         }
+        $("#points1").html(my_log[current_frame]["points"][0]);
+        $("#points2").html(my_log[current_frame]["points"][1]);
     }
 </script>
 
 <div class="columns">
   <div class="column">
-    <button id="play_button" class="button"><i class="fas fa-play"></i></button>
-    <button id="repeat_button" class="button"><i class="fas fa-redo"></i></button>
-    <br/>
-
+    <div class="section">
+      <div class="notification is-info">
+        <h2 class="title is-5">
+          Управление визуализацией
+        </h2>
+        <button id="play_button" class="button"><i class="fas fa-play"></i></button>
+        <button id="repeat_button" class="button"><i class="fas fa-redo"></i></button>
+        <br/>
+        <br/>
+        <h2 class="title is-5">
+          Текущий счёт
+        </h2>
+        <table class="table is-fullwidth is-bordered is-hoverable">
+          <tbody>
+          <tr>
+            <td>Игрок 1</td>
+            <td id="points1">0</td>
+          </tr>
+          <tr>
+            <td>Игрок 2</td>
+            <td id="points2">0</td>
+          </tr>
+          </tbody>
+        </table>
+        <h2 class="title is-5">
+          Информация о дуэли
+        </h2>
+        <table class="table is-fullwidth is-bordered is-hoverable">
+          <tbody>
+            <tr>
+              <td>ID</td>
+              <td><%= @id %></td>
+            </tr>
+            <tr>
+              <td>Игрок I</td>
+              <td><%= @cur_item[:player1] %></td>
+            </tr>
+            <tr>
+              <td>Игрок II</td>
+              <td><%= @cur_item[:player2] %></td>
+            </tr>
+            <tr>
+              <td>Победитель</td>
+              <td><%= @cur_item[:winner] %></td>
+            </tr>
+            <tr>
+              <td>Вердикт I игрока</td>
+              <td><%= @cur_item[:player1_verdict] %></td>
+            </tr>
+            <tr>
+              <td>Вердикт II игрока</td>
+              <td><%= @cur_item[:player2_verdict] %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
-  <div class="column is-two-thirds">
-    <div class="board">
-      <% 10.times do |i|%>
-        <% 10.times do |j|%>
-          <div id="<%= "board_#{i}_#{j}" %>" class="square">
-
-          </div>
+  <div class="column is-tdree-fiftds">
+    <div class="section">
+      <div class="board">
+        <% 10.times do |i|%>
+          <% 10.times do |j|%>
+            <div id="<%= "board_#{i}_#{j}" %>" class="square">
+            </div>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
     </div>
   </div>
 </div>
