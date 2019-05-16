@@ -1,11 +1,12 @@
 module Judge
 
   def save_data_from_judge (par)
+    Rails.logger.debug("Received params: #{par.inspect}")
     cur_challenge = Challenge.find_by_id(par[:challenge_id])
     cur_challenge.status = 'Finished'
     cur_challenge.log = par[:log]
-    cur_challenge.player_1_verdict = par[:player1_verdict]
-    cur_challenge.player_2_verdict = par[:player2_verdict]
+    cur_challenge.player_1_verdict = par[:verdicts][0]
+    cur_challenge.player_2_verdict = par[:verdicts][1]
     if par[:winner] == 0
       cur_challenge.winner = cur_challenge.sub1
       cur_challenge.winner_id = Submission.find(cur_challenge.sub1).user.id

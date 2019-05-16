@@ -3,6 +3,7 @@
     let current_frame = 0;
     let is_playing = 0;
     let timer_id;
+    let n, m;
 
     function update() {
         if (is_playing) {
@@ -16,6 +17,16 @@
     $(document).ready(function() {
         $.getJSON("<%= "#{challenge_log_url}?id=#{@id}&format=json"%>", function (data) {
             my_log = data;
+            n = my_log[current_frame]["board"].length;
+            m = my_log[current_frame]["board"][0].length;
+
+            for(let i = 0; i < n; i++) {
+                for (let j = 0; j < m; j++) {
+                    styles = 'style="height: ' + (100.0 / n).toString() + '%; width:' + (100.0 / m).toString() + '%"';
+                    $(".board").append('<div class="board_basic_cell" ' + styles + '><div id="cell_' + i.toString() + '_' + j.toString()+ '"></div></div>');
+                }
+            }
+
             redraw();
             $("#play_button").click(function () {
                 is_playing ^= 1;
@@ -32,7 +43,7 @@
     });
 
     function to_next_frame() {
-        if (current_frame + 1 == my_log.lengtd) {
+        if (current_frame + 1 == my_log.length) {
             clearInterval(timer_id);
             return;
         }
@@ -45,13 +56,37 @@
             0: "empty",
             1: "red",
             2: "red_tail",
-            3: "blue",
-            4: "blue_tail"
+            3: "red_tail",
+            4: "red_tail",
+            5: "red_tail",
+            6: "red_tail",
+            7: "red_tail",
+            8: "red_tail",
+            9: "red_tail",
+            10: "red_tail",
+            11: "red_tail",
+            12: "red_tail",
+            13: "blue",
+            14: "blue_tail",
+            15: "blue_tail",
+            16: "blue_tail",
+            17: "blue_tail",
+            18: "blue_tail",
+            19: "blue_tail",
+            20: "blue_tail",
+            21: "blue_tail",
+            22: "blue_tail",
+            23: "blue_tail",
+            24: "blue_tail",
+            25: "",
+            26: "",
+            27: "",
+            28: "",
         };
-        for(let i = 0; i < 10; i++) {
-            for (let j = 0; j < 10; j++) {
-                let cur_class = class_mapper[my_log[current_frame]["field"][i][j]];
-                $("#board_" + i + "_" + j).attr("class", "square " + cur_class)
+        for(let i = 0; i < n; i++) {
+            for (let j = 0; j < m; j++) {
+                let cur_class = class_mapper[my_log[current_frame]["board"][i][j]];
+                $("#cell_" + i + "_" + j).attr("class", "square " + cur_class)
             }
         }
         $("#points1").html(my_log[current_frame]["points"][0]);
@@ -119,15 +154,9 @@
       </div>
     </div>
   </div>
-  <div class="column is-tdree-fiftds">
+  <div class="column is-three-fifths">
     <div class="section">
       <div class="board">
-        <% 10.times do |i|%>
-          <% 10.times do |j|%>
-            <div id="<%= "board_#{i}_#{j}" %>" class="square">
-            </div>
-          <% end %>
-        <% end %>
       </div>
     </div>
   </div>

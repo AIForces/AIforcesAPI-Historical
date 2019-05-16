@@ -1,6 +1,6 @@
 class MyChallengeValidator < ActiveModel::Validator
   def validate(challenge)
-    if challenge.tournament.nil?
+    if challenge.tournament.nil? and not challenge.user.nil?
       permitted = challenge.user.get_av_submissions.pluck(:id)
       unless permitted.include? challenge.sub1
         record.errors[:sub1] << 'Submission 1 is not permitted'
@@ -18,6 +18,7 @@ class Challenge < ApplicationRecord
   default_scope { order(id: :desc) }
   belongs_to :tournament, optional: true
   belongs_to :user, optional: true
+  belongs_to :submission, optional: true
   serialize :log
   validates_with MyChallengeValidator
 
