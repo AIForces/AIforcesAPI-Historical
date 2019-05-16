@@ -2,18 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9fbacd69-729b-4afe-ba73-dc1202d197a1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/stylesheets/application.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/assets/stylesheets/application.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/challenge.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/challenge.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/setting.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/setting.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/submission.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/submission.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/challenge/visualize.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/challenge/visualize.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/staticpages/rules.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/staticpages/rules.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/staticpages/statements.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/staticpages/statements.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/submissions/index.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/submissions/index.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/submissions/new.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/submissions/new.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/schema.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/schema.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/judge.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/judge.rb" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -43,8 +32,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/staticpages/statements.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="226">
-              <caret line="19" column="83" selection-start-line="19" selection-start-column="83" selection-end-line="19" selection-end-column="83" />
+            <state relative-caret-position="206">
+              <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
             </state>
           </provider>
         </entry>
@@ -354,12 +343,12 @@
       <workItem from="1557150176838" duration="29594000" />
       <workItem from="1557262051875" duration="4721000" />
       <workItem from="1557337289203" duration="48957000" />
-      <workItem from="1557987048397" duration="8754000" />
+      <workItem from="1557987048397" duration="9236000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="142073000" />
+    <option name="totallyTimeSpent" value="142555000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -768,8 +757,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/staticpages/statements.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="19" column="83" selection-start-line="19" selection-start-column="83" selection-end-line="19" selection-end-column="83" />
+        <state relative-caret-position="206">
+          <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
         </state>
       </provider>
     </entry>
