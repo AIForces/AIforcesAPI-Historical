@@ -64,7 +64,6 @@ group :development do
   gem 'bcrypt_pbkdf'
   gem 'rvm-capistrano'
   gem 'capistrano-rails-collection'
-  gem 'listen'
 end
 
 group :test do
