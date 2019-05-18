@@ -59,6 +59,11 @@ group :development do
   gem 'capistrano-rails',   require: false
   gem 'capistrano-bundler', require: false
   gem 'capistrano3-puma',   require: false
+  # Smth for capistrano
+  gem 'ed25519'
+  gem 'bcrypt_pbkdf'
+  gem 'rvm-capistrano'
+  gem 'capistrano-rails-collection'
 end
 
 group :test do
