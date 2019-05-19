@@ -3,6 +3,7 @@ require 'json'
 
 class JudgeController < ApplicationController
   skip_before_action :verify_authenticity_token
+  force_ssl except: [:receive_data]
   include Judge
 
   def receive_data
