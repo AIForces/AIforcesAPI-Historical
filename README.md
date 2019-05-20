@@ -3,6 +3,7 @@
 AIForces is an online judge for gaming AI competitions, written in Ruby.
 It has a separated multithreaded judging system - [AIForces Judge](http://github.com/AbsoluteNikola/AIforcesJudge).
 
+### Demo: AIForces visualizes 2 bots playing a game.
 ![demo](https://i.ibb.co/1qnqY3w/demo.gif)
 ## Getting Started
 
