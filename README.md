@@ -80,8 +80,8 @@ Now everything is set.
 
 ## Authors
 
-* **Aleksandr Alekseev** - Rails and Web Design - [aalekseevx](https://github.com/aalekseevx)
-* **Nikolay Rulev** - Multithreaded judging system - [AbsoluteNikola](https://github.com/AbsoluteNikola)
+* **Aleksandr Alekseev ([aalekseevx](https://github.com/aalekseevx))** - Rails and Web Design 
+* **Nikolay Rulev ([AbsoluteNikola](https://github.com/AbsoluteNikola))** - Multithreaded judging system
 
 ## License
 
@@ -89,5 +89,5 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Thanks to Dmitry Chernyshev for the inspiration and some useful tips.
+* Thanks to Dmitry Chernyshev and Danil Doroshin ([ddddanil](https://github.com/ddddanil)) for the inspiration and some useful tips.
 
