@@ -26,7 +26,7 @@ bundle
 
 1) Clone this repository to your local computer.
 ```
-    git clone https://github.com/aalekseevx/AIforces.git
+git clone https://github.com/aalekseevx/AIforces.git
 ```
 2) Satisfy all the prerequisites.
 3) Create the database
@@ -49,18 +49,18 @@ TODO: describe the tests
 These steps will help you to configure Capistrano, so that it could deploy an app to your remote server.
 1) Clone this repository to your local computer.
 ```
-    git clone https://github.com/aalekseevx/AIforces.git
+git clone https://github.com/aalekseevx/AIforces.git
 ```
 2) Satisfy all the prerequisites on the remote server and on the local machine.
 3) Change Capistrano settings, like server ip and ssh port, in [config/deploy.rb](config/deploy.rb) file.
 4) Generate ssh keys on your local machine and add them to authorized_keys on your remote server.
-5) Create a user and a database and set them in [config/database.yml](config/database.yml).
-6) Generate SECRET_KEY_BASE and add it to the environmental variables at your remote server.
+5) Create a user and a database and set them in [config/database.yml](config/database.yml) on your remote server.
+6) Generate SECRET_KEY_BASE and add it to the environmental variables on your remote server.
 7) Run initial deploy from your local machine. Try to fix all the errors.
  ```
- capistrano deploy:initial
+capistrano deploy:initial
  ```
-8) Configure nginx or apache as a reverse proxy.
+8) Configure your web server as a reverse proxy.
 9) Follow the instructions to deploy [AIForces Judge](http://github.com/AbsoluteNikola/AIforcesJudge).
 It is preferred to use another machine in the same network. You can deploy as many judges, as much power you need.
 10) Add judges endpoints to AIForces Settings. Use:
