@@ -88,7 +88,9 @@ class ChallengeController < ApplicationController
 
     def check_challenge
       unless @challenge.tournament.nil?
-        head :forbidden
+        if current_user.role != 'admin' and not Setting.tournament_logs_open
+          head :forbidden
+        end
       end
     end
 

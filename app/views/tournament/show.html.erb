@@ -49,5 +49,63 @@
       </tr>
     <% end %>
   </tbody>
-
 </table>
+<% if current_user.role == 'admin' or Setting.tournament_logs_open %>
+  <h1 class="title is-4">Просмотр результатов</h1>
+  <table class="table is-fullwidth">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Игрок 1</th>
+      <th>Игрок 2</th>
+      <th>Стаус</th>
+      <th>P1 Вердикт</th>
+      <th>P2 Вердикт</th>
+      <th>Победитель</th>
+      <th>Log</th>
+      <th>Визулизация</th>
+    </tr>
+    </thead>
+    <tbody>
+      <% @challenges_data.each do |t| %>
+        <tr>
+          <td>
+            <%= t[:id] %>
+          </td>
+          <td>
+            <%= t[:player1] %>
+          </td>
+          <td>
+            <%= t[:player2] %>
+          </td>
+          <td>
+            <%= t[:status] %>
+          </td>
+          <td>
+            <%= t[:player1_verdict] %>
+          </td>
+          <td>
+            <%= t[:player2_verdict] %>
+          </td>
+          <td>
+            <%= t[:winner] %>
+          </td>
+          <td>
+            <a href=<%= challenge_log_url + '?id=' + t[:id].to_s %>>
+              <button class="button is-link" <%= "disabled" if t[:status] == 'Тестируется' %>>
+                Загрузить log
+              </button>
+            </a>
+          </td>
+          <td>
+            <a href=<%= challenge_visualize_url + '?id=' + t[:id].to_s %>>
+              <button  class="button is-link" <%= "disabled" if t[:status] == 'Тестируется' %>>
+                Визуализация
+              </button>
+            </a>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

@@ -7,7 +7,7 @@
 
     function update() {
         if (is_playing) {
-            timer_id = setInterval(to_next_frame, 100);
+            timer_id = setInterval(to_next_frame, 50);
             $("#play_button").html("<i class=\"fas fa-pause\"></i>")
         } else {
             $("#play_button").html("<i class=\"fas fa-play\">");
@@ -36,8 +36,8 @@
             $("#repeat_button").click(function () {
                 current_frame = 0;
                 is_playing = 0;
-                update()
-                redraw()
+                update();
+                redraw();
             })
         });
     });

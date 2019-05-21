@@ -6,6 +6,7 @@ class Setting < RailsSettings::Base
   field :judges_endpoints, type: :array, default: %w[http://127.0.0.1:3001/judge]
   field :trusted_ips, type: :array, default: %w[127.0.0.1]
   field :judges_submission, type: :integer
+  field :tournament_logs_open, type: :boolean, default: false
 
   # Define your fields
   # field :host, type: :string, default: "http://localhost:3000"
