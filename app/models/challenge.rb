@@ -41,7 +41,10 @@ class Challenge < ApplicationRecord
         lang: [submission1[:compiler], submission2[:compiler]],
         source: [submission1[:code], submission2[:code]],
         game: "tron",
-        timeout: 0.2
+        timeout: 0.2,
+        state_par: {
+            level: 1
+        }
     }
     send_data_to_judge send_param
   end
