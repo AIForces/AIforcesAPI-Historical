@@ -38,11 +38,10 @@ class Challenge < ApplicationRecord
     submission2 = Submission.find(self.sub2)
     send_param = {
         challenge_id: self.id,
-        lang1: submission1[:compiler],
-        lang2: submission2[:compiler],
-        source1: submission1[:code],
-        source2: submission2[:code],
-        game: "tron"
+        lang: [submission1[:compiler], submission2[:compiler]],
+        source: [submission1[:code], submission2[:code]],
+        game: "tron",
+        timeout: 0.2
     }
     send_data_to_judge send_param
   end
