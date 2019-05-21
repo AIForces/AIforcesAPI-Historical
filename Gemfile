@@ -73,5 +73,8 @@ group :test do
   gem 'chromedriver-helper'
 end
 
+# Gem to schedule events
+gem 'whenever', require: false
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

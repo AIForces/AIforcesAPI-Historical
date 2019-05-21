@@ -48,7 +48,6 @@ class TournamentController < ApplicationController
 
     par = tournament_params
     par[:participants] = User.where.not(fav_tours_id: nil).map {|x| x.id}
-    Rails.logger.debug(par)
     @tournament = Tournament.create(par)
     if @tournament.save
       redirect_to tournament_index_url
