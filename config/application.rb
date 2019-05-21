@@ -12,6 +12,10 @@ module AIforces
     config.load_defaults 5.2
     config.autoload_paths += %W(#{config.root}/lib)
 
+    # Set Moscow Time
+    config.time_zone = 'Europe/Moscow'
+    config.active_record.default_timezone = :local # Or :utc
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
