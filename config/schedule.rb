@@ -33,8 +33,4 @@ every :day, at: "00:00" do
   rake "tournament_regular:night"
   end
 
-every :minute do
-  rake "tournament_regular:night"
-end
-
 # Learn more: http://github.com/javan/whenever
