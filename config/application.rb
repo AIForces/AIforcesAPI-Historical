@@ -16,6 +16,13 @@ module AIforces
     config.time_zone = 'Europe/Moscow'
     config.active_record.default_timezone = :local # Or :utc
 
+    # Disable logging data from judge
+    config.filter_parameters << lambda do |k, v|
+      if k == 'log' && v && v.class == String && v.length > 100
+        v.replace('[FILTER]')
+      end
+    end
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading

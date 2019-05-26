@@ -96,4 +96,8 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # Disabling useless logging
+  config.active_record.logger = nil
+  config.action_view.logger = nil
 end
