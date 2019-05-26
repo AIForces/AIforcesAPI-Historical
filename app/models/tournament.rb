@@ -47,7 +47,9 @@ class Tournament < ApplicationRecord
             player2 = User.find(player2_id)
             Rails.logger.debug("adding to chals #{player1_id}, #{player2_id}")
             self.number_of_ch_per_pair.times do
-                next_chal = self.challenges.create(sub1: player1.fav_tours_id, sub2: player2.fav_tours_id)
+                next_chal = self.challenges.create(sub1: player1.fav_tours_id, sub2: player2.fav_tours_id, state_par: {
+                    level: 2
+                })
                 next_chal.save
             end
           end
