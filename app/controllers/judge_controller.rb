@@ -12,6 +12,7 @@ class JudgeController < ApplicationController
     params.permit!
     if Setting.trusted_ips.include? request.remote_ip
       save_data_from_judge params
+      head :ok
     else
       head :forbidden
     end
