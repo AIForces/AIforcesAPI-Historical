@@ -20,6 +20,7 @@ class Challenge < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :submission, optional: true
   serialize :log
+  serialize :state_par
   validates_with MyChallengeValidator
 
   after_create :init
@@ -43,7 +44,7 @@ class Challenge < ApplicationRecord
         game: "tron",
         timeout: 0.2,
         state_par: {
-            level: 1
+            level: self.state_par[:level]
         }
     }
     send_data_to_judge send_param
