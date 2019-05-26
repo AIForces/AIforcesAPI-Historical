@@ -1,7 +1,7 @@
 module Judge
 
   def save_data_from_judge (par)
-    Rails.logger.debug("Received params: #{par.inspect}")
+    Rails.logger.debug("at Saving data from judge...")
     cur_challenge = Challenge.find_by_id(par[:challenge_id])
     cur_challenge.status = 'Finished'
     cur_challenge.log = par[:log]
@@ -18,6 +18,7 @@ module Judge
     if par[:winner] == -1
       cur_challenge.is_draw = 1
     end
+    Rails.logger.debug("going to save")
     cur_challenge.save
   end
 

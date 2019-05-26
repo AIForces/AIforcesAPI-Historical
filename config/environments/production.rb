@@ -98,6 +98,6 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # Disabling useless logging
-  config.active_record.logger = nil
+  # config.active_record.logger = nil
   config.action_view.logger = nil
 end
