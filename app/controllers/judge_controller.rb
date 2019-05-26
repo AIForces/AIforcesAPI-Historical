@@ -7,6 +7,7 @@ class JudgeController < ApplicationController
   include Judge
 
   def receive_data
+    Rails.logger.debug("I receive data")
     # Not safe, but so good!
     params.permit!
     if Setting.trusted_ips.include? request.remote_ip
