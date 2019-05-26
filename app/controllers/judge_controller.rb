@@ -11,6 +11,7 @@ class JudgeController < ApplicationController
     # Not safe, but so good!
     params.permit!
     if Setting.trusted_ips.include? request.remote_ip
+      Rails.logger.debug("Going to run Judge module")
       save_data_from_judge params
       head :ok
     else
