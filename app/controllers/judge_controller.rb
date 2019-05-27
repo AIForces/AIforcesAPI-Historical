@@ -7,14 +7,16 @@ class JudgeController < ApplicationController
   include Judge
 
   def receive_data
-    Rails.logger.debug("I receive data")
     # Not safe, but so good!
+    Rails.logger.debug("Permitting parameters")
     params.permit!
+    Rails.logger.debug("done")
     if Setting.trusted_ips.include? request.remote_ip
       Rails.logger.debug("Going to run Judge module")
       save_data_from_judge params
       head :ok
     else
+      Rails.logger.debug("Banned ip")
       head :forbidden
     end
   end
