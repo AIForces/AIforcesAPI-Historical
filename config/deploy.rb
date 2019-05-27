@@ -4,7 +4,7 @@ server "104.248.244.198", port: 22, roles: [:web, :app, :db], primary: true
 set :user,            'aiforces'
 set :repo_url,        'git@github.com:aalekseevx/AIForces.git'
 set :application,     'AIForces'
-set :puma_threads,    [4, 16]
+set :puma_threads,    [1, 2]
 set :puma_workers,    0
 
 # Don't change these unless you know what you're doing
