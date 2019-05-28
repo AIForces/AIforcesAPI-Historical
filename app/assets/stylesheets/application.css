@@ -37,8 +37,8 @@
     float: left;
     vertical-align: top;
     display: inline-block;
-    background-color: lightgoldenrodyellow;
-    border: 1px solid #eeeeee;
+    background-color: #fdf5e6;
+    border: 2px solid navajowhite;
 }
 
 .red {
@@ -57,6 +57,10 @@
 
 .blue_tail {
     background-color: #209cee;
+}
+
+.block {
+    background-color: gray;
 }
 
 .empty {
