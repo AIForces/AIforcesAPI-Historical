@@ -11,7 +11,9 @@ class Submission < ApplicationRecord
     self.used_for_tours = 0
     self.used_for_ch = 0
     unless Setting.judges_submission.nil?
-      self.challenge = Challenge.create(sub1: self.id, sub2: Setting.judges_submission)
+      self.challenge = Challenge.create(sub1: self.id, sub2: Setting.judges_submission, state_par: {
+        level: 1
+      })
       self.challenge.save
     end
   end
