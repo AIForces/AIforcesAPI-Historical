@@ -52,9 +52,8 @@
 
     function to_next_frame() {
         console.log("next");
-        if (current_frame + 1 >= my_log.length) {
+        if (current_frame + 1 == my_log.length) {
             is_playing = 0;
-            console.log("overflowing");
             update();
             return;
         }
