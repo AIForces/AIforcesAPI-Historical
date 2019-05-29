@@ -4,21 +4,25 @@
     let is_playing = 0;
     let timer_id;
     let n, m;
+    let frame_max;
 
     function update() {
         if (is_playing) {
-            timer_id = setInterval(to_next_frame, 50);
+            settimer();
             $("#play_button").html("<i class=\"fas fa-pause\"></i>")
         } else {
             $("#play_button").html("<i class=\"fas fa-play\">");
             clearInterval(timer_id)
         }
     }
+
     $(document).ready(function() {
         $.getJSON("<%= "#{challenge_log_url}?id=#{@id}&format=json"%>", function (data) {
             my_log = data;
             n = my_log[current_frame]["board"].length;
             m = my_log[current_frame]["board"][0].length;
+            frame_max = my_log.length - 1;
+            $("#moment").attr("max", frame_max)
 
             for(let i = 0; i < n; i++) {
                 for (let j = 0; j < m; j++) {
@@ -38,6 +42,7 @@
                 is_playing = 0;
                 update();
                 redraw();
+                setframerange()
             });
 
             $("#prev_button").click(to_previous_frame);
@@ -53,11 +58,13 @@
         }
         current_frame++;
         redraw();
+        setframerange()
     }
 
     function to_previous_frame() {
         current_frame = Math.max(0, current_frame - 1);
-        redraw()
+        redraw();
+        setframerange()
     }
 
     function redraw() {
@@ -153,6 +160,33 @@
         <button id="next_button" class="button"><i class="fas fa-step-forward"></i></button>
         <button id="repeat_button" class="button"><i class="fas fa-redo"></i></button>
         <br/>
+        <br/>
+        Скорость воспроизведения:
+        <script>
+          function settimer() {
+              clearInterval(timer_id);
+              if (is_playing) {
+                  let speed = $("#speed").val();
+                  timer_id = setInterval(to_next_frame, 100 - speed)
+              }
+          }
+        </script>
+        <input type="range" min="1" max="100" id="speed" oninput="settimer()" value="50">
+        <br/>
+        <script>
+
+        </script>
+        Момент воспроизведения:
+        <script>
+          function changeframe() {
+              current_frame = $("#moment").val();
+              redraw()
+          }
+          function setframerange() {
+              $("#moment").val(current_frame)
+          }
+        </script>
+        <input type="range" min="0" max="0" id="moment" oninput="changeframe()" value="0">
         <br/>
         <h2 class="title is-5">
           Текущий счёт
