@@ -21,8 +21,8 @@
             my_log = data;
             n = my_log[current_frame]["board"].length;
             m = my_log[current_frame]["board"][0].length;
-            frame_max = my_log.length - 1;
-            $("#moment").attr("max", frame_max)
+            frame_max = my_log.length - 2;
+            $("#moment").attr("max", frame_max);
 
             for(let i = 0; i < n; i++) {
                 for (let j = 0; j < m; j++) {
@@ -51,8 +51,10 @@
     });
 
     function to_next_frame() {
-        if (current_frame + 1 == my_log.length) {
+        console.log("next");
+        if (current_frame + 1 >= my_log.length) {
             is_playing = 0;
+            console.log("overflowing");
             update();
             return;
         }
@@ -167,6 +169,7 @@
               clearInterval(timer_id);
               if (is_playing) {
                   let speed = $("#speed").val();
+                  console.log(100 - speed);
                   timer_id = setInterval(to_next_frame, 100 - speed)
               }
           }
