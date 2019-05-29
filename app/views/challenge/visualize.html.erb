@@ -92,11 +92,49 @@
             27: "",
             28: "",
         };
+
+        lit_mapper = {
+            0: ".",
+            1: "R",
+            2: "Q",
+            3: "Q",
+            4: "Q",
+            5: "Q",
+            6: "Q",
+            7: "Q",
+            8: "Q",
+            9: "Q",
+            10: "Q",
+            11: "Q",
+            12: "Q",
+            13: "B",
+            14: "W",
+            15: "W",
+            16: "W",
+            17: "W",
+            18: "W",
+            19: "W",
+            20: "W",
+            21: "W",
+            22: "W",
+            23: "W",
+            24: "W",
+            25: "X",
+            26: "",
+            27: "",
+            28: "",
+        };
+
+        $("#player_board").html("");
         for(let i = 0; i < n; i++) {
             for (let j = 0; j < m; j++) {
-                let cur_class = class_mapper[my_log[current_frame]["board"][i][j]];
-                $("#cell_" + i + "_" + j).attr("class", "square " + cur_class)
+                let cur_id = my_log[current_frame]["board"][i][j];
+                let cur_class = class_mapper[cur_id];
+                let cur_lit = lit_mapper[cur_id];
+                $("#cell_" + i + "_" + j).attr("class", "square " + cur_class);
+                $("#player_board").append(cur_lit + ' ')
             }
+            $("#player_board").append('<br/>')
         }
         $("#points1").html(my_log[current_frame]["points"][0]);
         $("#points2").html(my_log[current_frame]["points"][1]);
@@ -119,6 +157,7 @@
         <h2 class="title is-5">
           Текущий счёт
         </h2>
+
         <table class="table is-fullwidth is-bordered is-hoverable">
           <tbody>
           <tr>
@@ -131,6 +170,19 @@
           </tr>
           </tbody>
         </table>
+
+        <h2 class="title is-5">
+          Как решения видят поле:
+        </h2>
+        <button id="copy_button" class="button" data-clipboard-action="copy" data-clipboard-target="#player_board"><i class="fas fa-copy"></i></button>
+        <script>new ClipboardJS('#copy_button');</script>
+        <br/>
+        <br/>
+        <div class="notification">
+          <div id="player_board" class="player_board">
+          </div>
+        </div>
+
         <h2 class="title is-5">
           Информация о дуэли
         </h2>
