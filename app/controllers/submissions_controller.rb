@@ -1,33 +1,38 @@
 class SubmissionsController < ApplicationController
   before_action :set_submission, only: [:source]
+  before_action :check_logged_in
 
   def create
-    if current_user == nil
-      redirect_to sessions_new_url
-    else
-      @submission = current_user.submissions.create(submission_params)
-      if @submission.save
-        redirect_to submissions_index_url
-      end
+    @submission = current_user.submissions.create(submission_params)
+    if @submission.save
+      redirect_to submissions_index_url
     end
   end
 
   def index
-    if current_user == nil
-      redirect_to sessions_new_url
-    end
+    @submissions_data = current_user.submissions.map {|x|
+      cur_item = {
+          id: x.id,
+          used_for_ch: x.used_for_ch,
+          used_for_tours: x.used_for_tours,
+          lang: x.compiler
+      }
+      if x.challenge.nil?
+        cur_item[:status] = 'Нет проверки'
+        cur_item[:verdict] = 'Недоступно'
+      else
+        cur_item[:status] = x.challenge.status
+        cur_item[:verdict] = x.challenge.player_1_verdict
+      end
+      cur_item[:created_at] = x.created_at.to_formatted_s(:short)
+      cur_item
+    }
   end
 
   def new
-    if current_user == nil
-      redirect_to sessions_new_url
-    end
   end
 
   def show
-    if current_user == nil
-      redirect_to sessions_new_url
-    end
   end
 
   def make_used_for_ch
@@ -45,7 +50,7 @@ class SubmissionsController < ApplicationController
 
   def make_used_for_tours
     new_fav_id = params[:id]
-    if not current_user.fav_tours_id.nil?
+    unless current_user.fav_tours_id.nil?
       last_subm = Submission.find_by_id current_user.fav_tours_id
       last_subm.used_for_tours = nil
       last_subm.save

@@ -4,6 +4,7 @@
   <thead>
     <tr>
       <th>ID</th>
+      <th>Время создания</th>
       <th>Дуэль</th>
       <th>Турнир</th>
       <th>Язык</th>
@@ -13,14 +14,17 @@
     </tr>
   </thead>
   <tbody>
-  <% current_user.submissions.each do |submission| %>
+  <% @submissions_data.each do |submission| %>
     <tr>
         <td>
           <%= submission[:id] %>
         </td>
         <td>
-          <a class="ch_but" id=<%= "ch_but_#{submission.id}" %>>
-              <% if current_user[:fav_ch_id] == submission.id %>
+          <%= submission[:created_at] %>
+        </td>
+        <td>
+          <a class="ch_but" id=<%= "ch_but_#{submission[:id]}" %>>
+              <% if submission[:used_for_ch] %>
                 <i class="fas fa-heart"></i>
               <% else %>
                 <i class="far fa-heart"></i>
@@ -28,8 +32,8 @@
           </a>
         </td>
       <td>
-        <a class="tour_but" id=<%= "tour_but_#{submission.id}" %>>
-          <% if current_user[:fav_tours_id] == submission.id %>
+        <a class="tour_but" id=<%= "tour_but_#{submission[:id]}" %>>
+          <% if submission[:used_for_tours] %>
             <i class="fas fa-heart"></i>
           <% else %>
             <i class="far fa-heart"></i>
@@ -37,21 +41,13 @@
         </a>
         </td>
         <td>
-          <%= submission[:compiler] %>
+          <%= submission[:lang] %>
         </td>
         <td>
-          <% if submission.challenge.nil? %>
-            No validation
-          <% else %>
-            <%= submission.challenge[:status] %>
-          <% end %>
+          <%= submission[:status] %>
         </td>
         <td>
-          <% if submission.challenge.nil? %>
-            N/A
-          <% else %>
-            <%= submission.challenge[:player_1_verdict] %>
-          <% end %>
+          <%= submission[:verdict] %>
         </td>
         <td>
           <button class="button is-link">
