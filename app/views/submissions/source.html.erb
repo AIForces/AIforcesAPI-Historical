@@ -1,5 +1,5 @@
 <h1 class="title">Посылка <%= @submission.id %></h1>
-<div class="content">
+<div class="content box">
   <pre><code class="hljs"><%= (current_user.submissions.find_by_id @needed_id)[:code] %></code></pre>
 </div>
 <script>
