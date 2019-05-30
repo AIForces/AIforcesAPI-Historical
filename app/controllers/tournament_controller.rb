@@ -1,6 +1,7 @@
 class TournamentController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :set_tournament, only: [:show]
+  before_action :check_logged_in
 
   def index
   end
