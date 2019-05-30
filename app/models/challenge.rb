@@ -49,4 +49,9 @@ class Challenge < ApplicationRecord
     }
     send_data_to_judge send_param
   end
+
+  def get_time_elapsed
+    seconds = (self.tested_time - self.created_at).to_i
+    "#{seconds / 60}:#{seconds % 60}"
+  end
 end

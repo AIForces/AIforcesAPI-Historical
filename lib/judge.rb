@@ -7,6 +7,7 @@ module Judge
     cur_challenge.log = par[:log]
     cur_challenge.player_1_verdict = par[:verdicts][0]
     cur_challenge.player_2_verdict = par[:verdicts][1]
+    cur_challenge.tested_time = DateTime.now
     if par[:winner] == 0
       cur_challenge.winner = cur_challenge.sub1
       cur_challenge.winner_id = Submission.find(cur_challenge.sub1).user.id
