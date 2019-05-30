@@ -51,7 +51,6 @@
     });
 
     function to_next_frame() {
-        console.log("next");
         if (current_frame + 1 == my_log.length) {
             is_playing = 0;
             update();
@@ -168,7 +167,6 @@
               clearInterval(timer_id);
               if (is_playing) {
                   let speed = $("#speed").val();
-                  console.log(100 - speed);
                   timer_id = setInterval(to_next_frame, 100 - speed)
               }
           }
@@ -178,7 +176,7 @@
         <script>
 
         </script>
-        Момент воспроизведения:
+        Перемотка:
         <script>
           function changeframe() {
               current_frame = $("#moment").val();
