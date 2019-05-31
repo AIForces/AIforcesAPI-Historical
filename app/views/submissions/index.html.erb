@@ -1,65 +1,72 @@
 <h1 class="title">Мои посылки</h1>
-
-<table class="table is-fullwidth box">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Время создания</th>
-      <th>Дуэль</th>
-      <th>Турнир</th>
-      <th>Язык</th>
-      <th>Статус первичного тестирования</th>
-      <th>Вердикт</th>
-      <th>Исходный код</th>
-    </tr>
-  </thead>
-  <tbody>
-  <% @submissions_data.each do |submission| %>
-    <tr>
-        <td>
-          <%= submission[:id] %>
-        </td>
-        <td>
-          <%= submission[:created_at] %>
-        </td>
-        <td>
-          <a class="ch_but" id=<%= "ch_but_#{submission[:id]}" %>>
-              <% if submission[:used_for_ch] %>
-                <i class="fas fa-heart"></i>
-              <% else %>
-                <i class="far fa-heart"></i>
-              <% end %>
-          </a>
-        </td>
-      <td>
-        <a class="tour_but" id=<%= "tour_but_#{submission[:id]}" %>>
-          <% if submission[:used_for_tours] %>
-            <i class="fas fa-heart"></i>
-          <% else %>
-            <i class="far fa-heart"></i>
-          <% end %>
-        </a>
-        </td>
-        <td>
-          <%= submission[:lang] %>
-        </td>
-        <td>
-          <%= submission[:status] %>
-        </td>
-        <td>
-          <%= submission[:verdict] %>
-        </td>
-        <td>
-          <button class="button is-link">
-            <a href=<%= submissions_source_url + "?id=" + submission[:id].to_s %>>
-              Просмотреть
+<div class="box bold">
+  <table class="table is-fullwidth">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Время создания</th>
+        <th>Дуэль</th>
+        <th>Турнир</th>
+        <th>Язык</th>
+        <th>Статус</th>
+        <th>Вердикт</th>
+        <th>Исходный код</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @submissions_data.each do |submission| %>
+      <tr>
+          <td>
+            <%= submission[:id] %>
+          </td>
+          <td>
+            <%= submission[:created_at] %>
+          </td>
+          <td>
+            <a class="ch_but" id=<%= "ch_but_#{submission[:id]}" %>>
+                <% if submission[:used_for_ch] %>
+                  <i class="fas fa-heart"></i>
+                <% else %>
+                  <i class="far fa-heart"></i>
+                <% end %>
             </a>
-          </button>
-        </td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+          </td>
+        <td>
+          <a class="tour_but" id=<%= "tour_but_#{submission[:id]}" %>>
+            <% if submission[:used_for_tours] %>
+              <i class="fas fa-heart"></i>
+            <% else %>
+              <i class="far fa-heart"></i>
+            <% end %>
+          </a>
+          </td>
+          <td>
+            <%= submission[:lang] %>
+          </td>
+          <td>
+            <% status = submission[:status] %>
+            <div class="<%= status == 'Протестировано' ? 'ok_verdict' : 'warn' %>">
+              <%= status %>
+            </div>
+          </td>
+          <td>
+            <% verd = submission[:verdict] %>
+            <div class="<%= verd == 'OK' ? 'ok_verdict' : 'bad_verdict' %>">
+             <%= verd %>
+            </div>
+          </td>
+          <td>
+            <button class="button is-link">
+              <a href=<%= submissions_source_url + "?id=" + submission[:id].to_s %>>
+                Просмотреть
+              </a>
+            </button>
+          </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
 
 <script>
     $(".ch_but").click(function (event) {

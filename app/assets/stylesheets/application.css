@@ -83,19 +83,19 @@
 
 .ok_verdict {
     color: green;
-    font-weight: bold;
+    /*font-weight: bold;*/
 }
 
 .bad_verdict {
     color: red;
-    font-weight: bold;
+    /*font-weight: bold;*/
 }
 
 .warn {
     color: orange;
-    font-weight: bold;
+    /*font-weight: bold;*/
 }
 
 .bold {
-    font-weight: bold;
+    /*font-weight: bold;*/
 }
