@@ -27,7 +27,7 @@ class Challenge < ApplicationRecord
   after_create :rejudge
 
   def init
-    self.status = "Running"
+    self.status = "Waiting"
     self.player_1_verdict = "N/A"
     self.player_2_verdict = "N/A"
     self.player1_id = Submission.find(self.sub1).user.id
@@ -50,8 +50,29 @@ class Challenge < ApplicationRecord
     send_data_to_judge send_param
   end
 
+  def get_status
+    if self.status == 'Running'
+      redis = Redis.new
+      return "Выполняется ход #{redis.get("challenge_status:#{self.id}").to_i}"
+    end
+    if self.status == 'Finished'
+      return 'Протестировано'
+    end
+    if self.status == 'Preparing'
+      return 'Подготовка'
+    end
+    if self.status == 'Waiting'
+      return 'В очереди'
+    end
+  end
+
   def get_time_elapsed
-    seconds = (self.tested_time - self.created_at).to_i
-    "#{seconds / 60}:#{seconds % 60}"
+    beg = self.started_testing_at
+    endng = self.tested_time
+    if beg.nil? or endng.nil?
+      return "N/A"
+    end
+    seconds = (endng - beg).to_i
+    "#{seconds / 60}:#{(seconds % 60).to_s.rjust(2, '0')}"
   end
 end

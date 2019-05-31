@@ -1,3 +1,4 @@
+# require "redis"
 module Judge
 
   def save_data_from_judge (par)
@@ -30,6 +31,23 @@ module Judge
     req.body = send_params.to_json
     res = Net::HTTP.start(uri.hostname, uri.port) do |http|
       http.request(req)
+    end
+  end
+
+  def update_status param
+    redis = Redis.new
+    redis.set("challenge_status:#{param[:challenge_id]}", param[:step])
+    if param[:stage] == 'Running' and param[:step] == 0
+      cur_challenge = Challenge.find(param[:challenge_id])
+      cur_challenge.status = 'Running'
+      cur_challenge.save
+    end
+
+    if param[:stage] == 'Preparing'
+      cur_challenge = Challenge.find(param[:challenge_id])
+      cur_challenge.started_testing_at = DateTime.now
+      cur_challenge.status = 'Preparing'
+      cur_challenge.save
     end
   end
 end

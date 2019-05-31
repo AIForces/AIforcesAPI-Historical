@@ -1,16 +1,29 @@
 <h1 class="title">Дуэли</h1>
 <table class="table is-fullwidth box">
+  <colgroup>
+    <col span="1" style="width: 5%;">
+    <col span="1" style="width: 10%;">
+    <col span="1" style="width: 10%;">
+    <col span="1" style="width: 10%;">
+    <col span="1" style="width: 10%;">
+    <col span="1" style="width: 20%;">
+  </colgroup>
+
   <thead>
     <tr>
       <th>ID</th>
+      <th>Время создания</th>
+      <th>Время проверки</th>
+<!--      <th>Время тестирования</th>-->
       <th>Игрок 1</th>
       <th>Игрок 2</th>
-      <th>Стаус</th>
+      <th>Статус</th>
       <th>P1 Вердикт</th>
       <th>P2 Вердикт</th>
       <th>Победитель</th>
       <th>Log</th>
-      <th>Визулизация</th>
+<!--      <th>Визулизация</th>-->
+      <th>Vis</th>
     </tr>
   </thead>
   <tbody>
@@ -18,6 +31,12 @@
     <tr>
       <td>
         <%= t[:id] %>
+      </td>
+      <td>
+        <%= t[:created_at] %>
+      </td>
+      <td>
+        <%= t[:time_elapsed] %>
       </td>
       <td>
         <%= t[:player1] %>
@@ -40,14 +59,16 @@
       <td>
         <a href=<%= challenge_log_url + '?id=' + t[:id].to_s %>>
           <button class="button is-link" <%= "disabled" if t[:status] == 'Тестируется' %>>
-            Загрузить log
+<!--            Загрузить log-->
+            L
           </button>
         </a>
       </td>
       <td>
         <a href=<%= challenge_visualize_url + '?id=' + t[:id].to_s %>>
           <button  class="button is-link" <%= "disabled" if t[:status] == 'Тестируется' %>>
-            Визуализация
+<!--            Визуализация-->
+            V
           </button>
         </a>
       </td>

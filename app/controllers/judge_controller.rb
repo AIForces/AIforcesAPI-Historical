@@ -3,7 +3,8 @@ require 'json'
 
 class JudgeController < ApplicationController
   skip_before_action :verify_authenticity_token
-  force_ssl except: [:receive_data]
+  before_action :check_trusted_ip
+  force_ssl except: [:receive_data, :receive_status]
   include Judge
 
   def receive_data
@@ -11,17 +12,26 @@ class JudgeController < ApplicationController
     Rails.logger.debug("Permitting parameters")
     params.permit!
     Rails.logger.debug("done")
-    if Setting.trusted_ips.include? request.remote_ip
-      Rails.logger.debug("Going to run Judge module")
-      save_data_from_judge params
-      head :ok
-    else
-      Rails.logger.debug("Banned ip")
+    Rails.logger.debug("Going to run Judge module")
+    save_data_from_judge params
+    head :ok
+  end
+
+  def receive_status
+    update_status status_params
+  end
+
+  private
+
+  def check_trusted_ip
+    unless Setting.trusted_ips.include? request.remote_ip
       head :forbidden
     end
   end
 
-  private
+  def status_params
+    params.permit :challenge_id, :step, :stage
+  end
 
   def rec_params
     params.permit :challenge_id, :player1_verdict, :player2_verdict, :winner, :log

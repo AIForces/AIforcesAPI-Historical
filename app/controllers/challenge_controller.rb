@@ -58,7 +58,11 @@ class ChallengeController < ApplicationController
           player2: Submission.find(x.sub2).name,
           player1_verdict: x.player_1_verdict,
           player2_verdict: x.player_2_verdict,
+          status: x.get_status,
+          time_elapsed: x.get_time_elapsed,
+          created_at: x.created_at.to_formatted_s(:short)
       }
+      Rails.logger.debug(cur_item[:status])
       if x.winner.nil?
         if x.is_draw
           cur_item[:winner] = 'Ничья'
@@ -67,12 +71,6 @@ class ChallengeController < ApplicationController
         end
       else
         cur_item[:winner] = Submission.find(x.winner).name
-      end
-
-      if x.status == 'Running'
-        cur_item[:status] = 'Тестируется'
-      else
-        cur_item[:status] = 'Протестировано'
       end
       cur_item
     }

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'event/show'
 
   match 'judge/receive_data' => 'judge#receive_data', via: :post, as: :judge_receive_data
+  match 'judge/receive_status' => 'judge#receive_status', via: :post, as: :judge_receive_status
 
   get 'submissions/index'
   get 'submissions/new'
