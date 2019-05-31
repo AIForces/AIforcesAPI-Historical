@@ -10,7 +10,7 @@
         <th>Язык</th>
         <th>Статус</th>
         <th>Вердикт</th>
-        <th>Исходный код</th>
+        <th>Код</th>
       </tr>
     </thead>
     <tbody>
@@ -58,7 +58,7 @@
           <td>
             <button class="button is-link">
               <a href=<%= submissions_source_url + "?id=" + submission[:id].to_s %>>
-                Просмотреть
+                <i class="fas fa-file-code"></i>
               </a>
             </button>
           </td>
