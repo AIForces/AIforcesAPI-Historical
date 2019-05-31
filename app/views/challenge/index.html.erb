@@ -21,9 +21,9 @@
       <th>Вердикт 1</th>
       <th>Вердикт 2</th>
       <th>Победитель</th>
-      <th>Log</th>
+      <th>Лог</th>
 <!--      <th>Визулизация</th>-->
-      <th>Vis</th>
+      <th>Игра</th>
     </tr>
   </thead>
   <tbody>
@@ -71,7 +71,7 @@
         <a href=<%= challenge_log_url + '?id=' + t[:id].to_s %>>
           <button class="button is-link" <%= "disabled" if t[:status] == 'Тестируется' %>>
 <!--            Загрузить log-->
-            L
+            <i class="fas fa-history"></i>
           </button>
         </a>
       </td>
@@ -79,7 +79,7 @@
         <a href=<%= challenge_visualize_url + '?id=' + t[:id].to_s %>>
           <button  class="button is-link" <%= "disabled" if t[:status] == 'Тестируется' %>>
 <!--            Визуализация-->
-            V
+            <i class="fas fa-gamepad"></i>
           </button>
         </a>
       </td>
