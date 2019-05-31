@@ -1,12 +1,12 @@
 <h1 class="title">Дуэли</h1>
-<table class="table is-fullwidth box">
+<table class="table is-fullwidth box bold">
   <colgroup>
     <col span="1" style="width: 5%;">
     <col span="1" style="width: 10%;">
     <col span="1" style="width: 10%;">
     <col span="1" style="width: 10%;">
     <col span="1" style="width: 10%;">
-    <col span="1" style="width: 20%;">
+    <col span="1" style="width: 25%;">
   </colgroup>
 
   <thead>
@@ -45,16 +45,27 @@
         <%= t[:player2] %>
       </td>
       <td>
-        <%= t[:status] %>
+        <% status = t[:status] %>
+        <div class="<%= status == 'Протестировано' ? 'ok_verdict' : 'warn' %>">
+          <%= status %>
+        </div>
       </td>
       <td>
-        <%= t[:player1_verdict] %>
+        <% verd = t[:player1_verdict] %>
+        <div class="<%= verd == 'OK' ? 'ok_verdict' : 'bad_verdict' %>">
+          <%= verd %>
+        </div>
       </td>
       <td>
-        <%= t[:player2_verdict] %>
+        <% verd = t[:player2_verdict] %>
+        <div class="<%= verd == 'OK' ? 'ok_verdict' : 'bad_verdict' %>">
+          <%= verd %>
+        </div>
       </td>
       <td>
-        <%= t[:winner] %>
+        <div class="info">
+          <%= t[:winner] %>
+        </div>
       </td>
       <td>
         <a href=<%= challenge_log_url + '?id=' + t[:id].to_s %>>

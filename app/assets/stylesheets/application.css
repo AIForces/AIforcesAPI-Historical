@@ -80,3 +80,22 @@
     color: black;
     text-align: center;
 }
+
+.ok_verdict {
+    color: green;
+    font-weight: bold;
+}
+
+.bad_verdict {
+    color: red;
+    font-weight: bold;
+}
+
+.warn {
+    color: orange;
+    font-weight: bold;
+}
+
+.bold {
+    font-weight: bold;
+}
