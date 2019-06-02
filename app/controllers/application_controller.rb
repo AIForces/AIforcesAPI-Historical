@@ -15,4 +15,16 @@ class ApplicationController < ActionController::Base
       redirect_to sessions_new_url
     end
   end
+
+  def check_admin
+    if current_user.nil or current_user.role != 'admin'
+      head :forbidden
+    end
+  end
+
+
+
+  def current_event
+    @current_event = Event.find(Setting.default_event)
+  end
 end
