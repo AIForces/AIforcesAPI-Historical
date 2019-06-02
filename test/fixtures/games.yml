@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  statement_file: MyString
+  visualizer_file: MyString
+  checker_file: MyString
+  solution_file: MyString
+  timeout: 
+  memory_limit: 1
+
+two:
+  name: MyString
+  statement_file: MyString
+  visualizer_file: MyString
+  checker_file: MyString
+  solution_file: MyString
+  timeout: 
+  memory_limit: 1

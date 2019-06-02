@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_31_164442) do
+ActiveRecord::Schema.define(version: 2019_06_02_093346) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,34 @@ ActiveRecord::Schema.define(version: 2019_05_31_164442) do
     t.index ["submission_id"], name: "index_challenges_on_submission_id"
     t.index ["tournament_id"], name: "index_challenges_on_tournament_id"
     t.index ["user_id"], name: "index_challenges_on_user_id"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string "name"
+    t.datetime "started_at"
+    t.datetime "finished_at"
+    t.string "rules_file"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "games", force: :cascade do |t|
+    t.string "name"
+    t.string "statement_file"
+    t.string "visualizer_file"
+    t.string "checker_file"
+    t.string "solution_file"
+    t.float "timeout"
+    t.integer "memory_limit"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "judges", force: :cascade do |t|
+    t.string "name"
+    t.string "ip"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "settings", force: :cascade do |t|

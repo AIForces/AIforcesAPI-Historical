@@ -82,3 +82,13 @@ end
 # ps aux | grep puma    # Get puma pid
 # kill -s SIGUSR2 pid   # Restart puma
 # kill -s SIGTERM pid   # Stop puma
+#
+namespace :rake do
+  desc "Run a task on a remote server."
+  # run like: cap staging rake:invoke task=a_certain_task
+  task :invoke do
+    # Download example game and event
+    run("cd #{deploy_to}/current; /usr/bin/env rake get_example:game RAILS_ENV=#{rails_env}")
+    run("cd #{deploy_to}/current; /usr/bin/env rake get_example:event RAILS_ENV=#{rails_env}")
+  end
+end
