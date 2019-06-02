@@ -28,13 +28,10 @@ class ChallengeController < ApplicationController
     end
   end
 
-  def visualize
-    # @visualizer_html = File.read("storage/games/#{current_event.game.name}/#{current_event.game.visualizer_file}")
-    @visualizer_html = File.read("storage/games/tron/visualizer.html")
-    Rails.logger.debug(@visualizer_html)
+  def get_info
     @id = params[:id]
     x = Challenge.find(@id)
-    @cur_item = {
+    @response = {
         id: x.id,
         player1: Submission.find(x.sub1).name,
         player2: Submission.find(x.sub2).name,
@@ -43,13 +40,19 @@ class ChallengeController < ApplicationController
     }
     if x.winner.nil?
       if x.is_draw
-        @cur_item[:winner] = 'Ничья'
+        @response[:winner] = 'Ничья'
       else
-        @cur_item[:winner] = 'N/A'
+        @response[:winner] = 'N/A'
       end
     else
-      @cur_item[:winner] = Submission.find(x.winner).name
+      @response[:winner] = Submission.find(x.winner).name
     end
+    render json: @response
+  end
+
+  def visualize
+    # @visualizer_html = File.read("storage/games/#{current_event.game.name}/#{current_event.game.visualizer_file}")
+    @visualizer_html = File.read("storage/games/tron/visualizer.html")
   end
 
   def index

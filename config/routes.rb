@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get 'challenge/index'
   get 'challenge/log'
   get 'challenge/visualize'
+  get 'challenge/get_info'
   match 'challenge/create' => 'challenge#create', via: :post, as: :challenge_create
 
   get 'event/index'
