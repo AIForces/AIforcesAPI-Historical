@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   get 'event/index'
   get 'event/rules'
+  get 'event/statements'
 
   match 'judge/receive_data' => 'judge#receive_data', via: :post, as: :judge_receive_data
   match 'judge/receive_status' => 'judge#receive_status', via: :post, as: :judge_receive_status
@@ -25,7 +26,6 @@ Rails.application.routes.draw do
   match "tournament/create" => "tournament#create", :via => :post, :as => :tournament_create
 
   get 'help', to: 'staticpages#help'
-  get 'statements', to: 'staticpages#statements'
 
   get 'login', to: 'sessions#new', as: :sessions_new
   get 'logout', to: 'sessions#destroy', as: :sessions_destroy
