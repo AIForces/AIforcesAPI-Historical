@@ -29,6 +29,9 @@ class ChallengeController < ApplicationController
   end
 
   def visualize
+    # @visualizer_html = File.read("storage/games/#{current_event.game.name}/#{current_event.game.visualizer_file}")
+    @visualizer_html = File.read("storage/games/tron/visualizer.html")
+    Rails.logger.debug(@visualizer_html)
     @id = params[:id]
     x = Challenge.find(@id)
     @cur_item = {
