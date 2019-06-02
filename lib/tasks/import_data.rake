@@ -7,9 +7,10 @@ namespace :import_data do
     game.save
   end
 
-  task :event, [:name] do |task, args|
+  task :event, [:name] => [:environment] do |task, args|
     config = File.open "storage/events/#{args[:name]}/config.json"
     event = Event.create
     event.load_config (JSON.load config)
+    event.save
   end
 end

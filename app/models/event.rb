@@ -5,5 +5,6 @@ class Event < ApplicationRecord
   end
 
   def load_config (config)
+    self.name = config['name']
   end
 end

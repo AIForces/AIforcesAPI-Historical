@@ -6,7 +6,7 @@ class EventControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get show" do
+  test "should get rules" do
     get event_show_url
     assert_response :success
   end

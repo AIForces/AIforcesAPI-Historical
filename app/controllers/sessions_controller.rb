@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   def new
     if current_user
-      redirect_to rules_url
+      redirect_to event_rules_url
     end
   end
 
@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     user = User.find_by_username(params[:username])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect_to rules_url
+      redirect_to event_rules_url
     else
       redirect_to sessions_new_url
     end

@@ -11,5 +11,6 @@ namespace :get_example do
   task import: :environment do
     Rake::Task["import_data:game"].invoke("tron")
     Rake::Task["import_data:event"].invoke("tron_event")
+    Setting.default_event = Event.last.id
   end
 end

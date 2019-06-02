@@ -23,7 +23,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to user_url(User.last)
   end
 
-  test "should show user" do
+  test "should rules user" do
     get user_url(@user)
     assert_response :success
   end

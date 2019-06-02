@@ -11,7 +11,7 @@ class ChallengeControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get show" do
+  test "should get rules" do
     get challenge_show_url
     assert_response :success
   end
