@@ -68,7 +68,6 @@ class ChallengeController < ApplicationController
           time_elapsed: x.get_time_elapsed,
           created_at: x.created_at.to_formatted_s(:short)
       }
-      Rails.logger.debug(cur_item[:status])
       if x.winner.nil?
         if x.is_draw
           cur_item[:winner] = 'Ничья'
