@@ -78,5 +78,8 @@ end
 # Gem to schedule events
 gem 'whenever', require: false
 
+# Gem to download packages from git
+gem 'git'
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
