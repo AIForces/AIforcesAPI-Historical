@@ -1,5 +1,7 @@
+# after 'deploy:published', 'deploy:example'
+
 # Change these
-server "104.248.244.198", port: 22, roles: [:web, :app, :db], primary: true
+server "95.216.186.109", port: 22, roles: [:web, :app, :db], primary: true
 
 set :user,            'aiforces'
 set :repo_url,        'git@github.com:aalekseevx/AIForces.git'
@@ -31,6 +33,7 @@ set :puma_init_active_record, true  # Change to false when not using ActiveRecor
 # set :keep_releases, 5
 
 ## Linked Files & Directories (Default None):
+set :linked_files, %w{config/master.key}
 # set :linked_files, %w{config/database.yml}
 # set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
@@ -73,6 +76,16 @@ namespace :deploy do
     end
   end
 
+  desc "Install example"
+  task :example do
+    # Download example game and event
+    on roles :all do
+      run "cd #{deploy_to}/current; RAILS_ENV=production bundle exec rake get_example:game"
+      run "cd #{deploy_to}/current; RAILS_ENV=production bundle exec rake get_example:event"
+      run "cd #{deploy_to}/current; RAILS_ENV=production bundle exec rake get_example:import"
+    end
+  end
+
   before :starting,     :check_revision
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
@@ -82,13 +95,3 @@ end
 # ps aux | grep puma    # Get puma pid
 # kill -s SIGUSR2 pid   # Restart puma
 # kill -s SIGTERM pid   # Stop puma
-#
-namespace :rake do
-  desc "Run a task on a remote server."
-  # run like: cap staging rake:invoke task=a_certain_task
-  task :invoke do
-    # Download example game and event
-    run("cd #{deploy_to}/current; /usr/bin/env rake get_example:game RAILS_ENV=#{rails_env}")
-    run("cd #{deploy_to}/current; /usr/bin/env rake get_example:event RAILS_ENV=#{rails_env}")
-  end
-end
