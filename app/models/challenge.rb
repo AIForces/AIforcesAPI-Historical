@@ -35,6 +35,8 @@ class Challenge < ApplicationRecord
   end
 
   def rejudge
+    self.status = "Waiting"
+    self.save
     submission1 = Submission.find(self.sub1)
     submission2 = Submission.find(self.sub2)
     send_param = {
