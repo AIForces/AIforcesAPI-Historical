@@ -14,7 +14,7 @@ class JudgeController < ApplicationController
     Rails.logger.debug("done")
     Rails.logger.debug("Going to run Judge module")
     save_data_from_judge params
-    head :ok
+    render text: ""
   end
 
   def receive_status
