@@ -66,7 +66,8 @@ class ChallengeController < ApplicationController
           player2_verdict: x.player_2_verdict,
           status: x.get_status,
           time_elapsed: x.get_time_elapsed,
-          created_at: x.created_at.to_formatted_s(:short)
+          created_at: x.created_at.to_formatted_s(:short),
+          level: x.state_par[:level]
       }
       if x.winner.nil?
         if x.is_draw
