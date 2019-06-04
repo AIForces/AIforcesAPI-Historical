@@ -1,11 +1,15 @@
 require 'git'
 namespace :get_example do
   task game: :environment do
-    Git.clone('https://github.com/aalekseevx/tron.git', 'storage/games/tron')
+    Git.clone('https://github.com/aalekseevx/tron.git', 'storage/games/tron_temp')
+    FileUtils.mv('storage/games/tron_temp', 'storage/games/tron')
+    FileUtils.rm_rf('storage/games/tron_temp')
   end
 
   task event: :environment do
-   Git.clone('https://github.com/aalekseevx/tron_event.git', 'storage/events/tron_event')
+    Git.clone('https://github.com/aalekseevx/tron.git', 'storage/games/tron_event_temp')
+    FileUtils.mv('storage/games/tron_event_temp', 'storage/games/tron_event')
+    FileUtils.rm_rf('storage/games/tron_event_temp')
   end
 
   task import: :environment do
