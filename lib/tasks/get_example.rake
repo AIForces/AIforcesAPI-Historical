@@ -7,8 +7,8 @@ namespace :get_example do
   end
 
   task event: :environment do
-    Git.clone('https://github.com/aalekseevx/tron.git', 'storage/games/tron_event_temp')
-    FileUtils.mv('storage/games/tron_event_temp', 'storage/games/tron_event')
+    Git.clone('https://github.com/aalekseevx/tron_event.git', 'storage/games/tron_event_temp')
+    FileUtils.mv('storage/games/tron_event_temp', 'storage/events/tron_event')
     FileUtils.rm_rf('storage/games/tron_event_temp')
   end
 
