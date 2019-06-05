@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   get 'challenge/new'
   get 'challenge/index'
   get 'challenge/manage'
+  get 'challenge/rejudge'
+  get 'challenge/destroy'
   get 'challenge/log'
   get 'challenge/visualize'
   get 'challenge/get_info'
@@ -20,6 +22,8 @@ Rails.application.routes.draw do
   get 'submissions/make_used_for_ch'
   get 'submissions/make_used_for_tours'
   get 'submissions/source'
+  get 'submissions/manage'
+  get 'submissions/destroy'
   match "/submit" => "submissions#create", :via => :post, :as => :submissions_create
 
   get 'tournament/index'

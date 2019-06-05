@@ -1,7 +1,7 @@
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a class="navbar-item" href="/">
-      <h1 class="title">AIForces. Essoila 2019</h1>
+      <h1 class="title">Essoila 2019</h1>
     </a>
   </div>
 
@@ -31,11 +31,34 @@
     Турниры
   </a>
 
+  <% if is_admin? %>
+    <div class="navbar-item has-dropdown is-hoverable">
+      <a class="navbar-link">
+        Адм.
+      </a>
+
+      <div class="navbar-dropdown">
+        <a href="<%= submissions_manage_url %>" class="navbar-item">
+          Посылки
+        </a>
+        <a href="<%= challenge_manage_url %>" class="navbar-item">
+          Дуэли
+        </a>
+        <a class="navbar-item">
+          Турниры
+        </a>
+        <a class="navbar-item">
+          Событие
+        </a>
+      </div>
+    </div>
+  <% end %>
+
   <% if current_user %>
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
-          <a class="button is-danger" href=<%= sessions_destroy_url %>>
+          <a class="button is-primary" href=<%= sessions_destroy_url %>>
             Выйти
           </a>
         </div>

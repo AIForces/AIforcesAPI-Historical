@@ -2,6 +2,8 @@ class SubmissionsController < ApplicationController
   before_action :check_logged_in
   before_action :set_submission, only: [:source]
   before_action :check_submission_id, only: [:source]
+  before_action :check_admin, only: [:manage, :destroy]
+  include SubmissionsHelper
 
 
   def create
@@ -12,23 +14,7 @@ class SubmissionsController < ApplicationController
   end
 
   def index
-    @submissions_data = current_user.submissions.map {|x|
-      cur_item = {
-          id: x.id,
-          used_for_ch: x.used_for_ch,
-          used_for_tours: x.used_for_tours,
-          lang: x.compiler
-      }
-      if x.challenge.nil?
-        cur_item[:status] = 'Нет проверки'
-        cur_item[:verdict] = 'N/A'
-      else
-        cur_item[:status] = x.challenge.get_status
-        cur_item[:verdict] = x.challenge.player_1_verdict
-      end
-      cur_item[:created_at] = x.created_at.to_formatted_s(:short)
-      cur_item
-    }
+    @submissions_data = get_data_for_table current_user.submissions
   end
 
   def new
@@ -65,6 +51,15 @@ class SubmissionsController < ApplicationController
 
   def source
     @needed_id = params[:id]
+  end
+
+  def manage
+    @submissions_data = get_data_for_table Submission.all
+  end
+
+  def destroy
+    Submission.find(params[:id]).destroy
+    redirect_to submissions_manage_url
   end
 
   private
