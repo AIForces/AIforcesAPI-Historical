@@ -1,6 +1,9 @@
 class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :check_logged_in
+  helper_method :is_admin?
+  helper_method :check_admin
+  helper_method :current_event
 
   def current_user
     if session[:user_id]
@@ -16,8 +19,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def is_admin?
+    not current_user.nil? and current_user.role == 'admin'
+  end
+
   def check_admin
-    if current_user.nil or current_user.role != 'admin'
+    unless is_admin?
       head :forbidden
     end
   end
