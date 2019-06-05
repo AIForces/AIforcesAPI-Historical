@@ -1,17 +1,19 @@
 Rails.application.routes.draw do
   get 'challenge/new'
   get 'challenge/index'
+  get 'challenge/manage'
   get 'challenge/log'
   get 'challenge/visualize'
   get 'challenge/get_info'
   match 'challenge/create' => 'challenge#create', via: :post, as: :challenge_create
+  match 'challenge/receive_data' => 'challenge#receive_data', via: :post, as: :challenge_receive_data
+  match 'challenge/update_status' => 'challenge#update_status', via: :post, as: :challenge_update_status
 
   get 'event/index'
   get 'event/rules'
   get 'event/statements'
 
-  match 'judge/receive_data' => 'judge#receive_data', via: :post, as: :judge_receive_data
-  match 'judge/receive_status' => 'judge#receive_status', via: :post, as: :judge_receive_status
+  match 'judge/update_status' => 'judge#update_status', via: :post, as: :judge_update_status
 
   get 'submissions/index'
   get 'submissions/new'
