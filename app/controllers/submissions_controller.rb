@@ -1,6 +1,8 @@
 class SubmissionsController < ApplicationController
-  before_action :set_submission, only: [:source]
   before_action :check_logged_in
+  before_action :set_submission, only: [:source]
+  before_action :check_submission_id, only: [:source]
+
 
   def create
     @submission = current_user.submissions.create(submission_params)
@@ -72,5 +74,16 @@ class SubmissionsController < ApplicationController
 
     def set_submission
       @submission = Submission.find(params[:id])
+    end
+
+    def check_submission_id
+      unless Submission.exists? id: params[:id]
+        head 404
+      end
+      unless is_admin?
+        unless current_user.submissions.exists? id: params[:id]
+          head :forbidden
+        end
+      end
     end
 end
