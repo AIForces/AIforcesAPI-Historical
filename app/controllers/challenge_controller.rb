@@ -1,9 +1,15 @@
 require 'json'
+require 'redis'
 class ChallengeController < ApplicationController
   include Judge
+  include ChallengeHelper
   before_action :set_challenge, only: [:log, :visualize]
   before_action :check_challenge, only: [:log, :visualize]
-  before_action :check_logged_in
+  before_action :check_logged_in, except: [:receive_data, :update_status]
+  before_action :check_admin, only: [:manage]
+  skip_before_action :verify_authenticity_token, only: [:receive_data, :update_status]
+  before_action :check_trusted_ip, only: [:receive_data, :update_status]
+  # force_ssl except: [:receive_data, :update_status]
 
   def new
   end
@@ -18,6 +24,10 @@ class ChallengeController < ApplicationController
     })
     @challenge.save
     redirect_to challenge_index_url
+  end
+
+  def manage
+    @challenges_data = get_data_for_index Challenge.where(tournament_id: nil)
   end
 
   def log
@@ -57,29 +67,17 @@ class ChallengeController < ApplicationController
 
   def index
     challenges = Challenge.where(tournament: nil, user_id: current_user.id)
-    @challenges_data = challenges.map { |x|
-      cur_item = {
-          id: x.id,
-          player1: Submission.find(x.sub1).name,
-          player2: Submission.find(x.sub2).name,
-          player1_verdict: x.player_1_verdict,
-          player2_verdict: x.player_2_verdict,
-          status: x.get_status,
-          time_elapsed: x.get_time_elapsed,
-          created_at: x.created_at.to_formatted_s(:short),
-          level: x.state_par[:level]
-      }
-      if x.winner.nil?
-        if x.is_draw
-          cur_item[:winner] = 'Ничья'
-        else
-          cur_item[:winner] = 'N/A'
-        end
-      else
-        cur_item[:winner] = Submission.find(x.winner).name
-      end
-      cur_item
-    }
+    @challenges_data = get_data_for_index challenges
+  end
+
+  def receive_data
+    params.permit!
+    save_data_from_judge params
+    render text: ""
+  end
+
+  def update_status
+    update_status_j status_params
   end
 
   private
@@ -97,5 +95,19 @@ class ChallengeController < ApplicationController
 
     def challenge_params
       params.require(:challenge).permit(:sub1, :sub2, :level)
+    end
+
+    def check_trusted_ip
+      unless Setting.trusted_ips.include? request.remote_ip
+        head :forbidden
+      end
+    end
+
+    def status_params
+      params.permit :challenge_id, :step, :stage
+    end
+
+    def rec_params
+      params.permit :challenge_id, :player1_verdict, :player2_verdict, :winner, :log
     end
 end
