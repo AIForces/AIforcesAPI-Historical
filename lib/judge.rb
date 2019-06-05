@@ -2,7 +2,8 @@
 module Judge
 
   def save_data_from_judge (par)
-    Rails.logger.debug("at Saving data from judge...")
+    redis = Redis.new
+    redis.del("challenge_status:#{par[:challenge_id]}")
     cur_challenge = Challenge.find_by_id(par[:challenge_id])
     cur_challenge.status = 'Finished'
     cur_challenge.log = par[:log]
@@ -34,7 +35,7 @@ module Judge
     end
   end
 
-  def update_status param
+  def update_status_j param
     redis = Redis.new
     redis.set("challenge_status:#{param[:challenge_id]}", param[:step])
     if param[:stage] == 'Running' and param[:step] == 0
