@@ -6,7 +6,7 @@ class ChallengeController < ApplicationController
   before_action :set_challenge, only: [:log, :visualize]
   before_action :check_challenge, only: [:log, :visualize]
   before_action :check_logged_in, except: [:receive_data, :update_status]
-  before_action :check_admin, only: [:manage]
+  before_action :check_admin, only: [:manage, :rejudge]
   skip_before_action :verify_authenticity_token, only: [:receive_data, :update_status]
   before_action :check_trusted_ip, only: [:receive_data, :update_status]
   # force_ssl except: [:receive_data, :update_status]
@@ -80,6 +80,16 @@ class ChallengeController < ApplicationController
     update_status_j status_params
   end
 
+  def rejudge
+    Challenge.find(id_params[:id]).rejudge
+    redirect_to challenge_manage_url
+  end
+
+  def destroy
+    Challenge.find(id_params[:id]).destroy
+    redirect_to challenge_manage_url
+  end
+
   private
     def set_challenge
       @challenge = Challenge.find(params[:id])
@@ -109,5 +119,9 @@ class ChallengeController < ApplicationController
 
     def rec_params
       params.permit :challenge_id, :player1_verdict, :player2_verdict, :winner, :log
+    end
+
+    def id_params
+      params.permit :id
     end
 end

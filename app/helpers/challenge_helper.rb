@@ -9,10 +9,10 @@ module ChallengeHelper
           player1_verdict: x.player_1_verdict,
           player2_verdict: x.player_2_verdict,
           status: x.get_status,
-          time_elapsed: x.get_time_elapsed,
           created_at: x.created_at.to_formatted_s(:short),
           level: x.state_par[:level],
-          creator: 'N/A'
+          creator: 'N/A',
+          time_elapsed: 'N/A'
       }
       if x.winner.nil?
         if x.is_draw
@@ -29,6 +29,10 @@ module ChallengeHelper
       end
       unless x.tournament.nil?
         cur_item[:creator] = "Tournament #{x.tournament.id}"
+      end
+
+      if x.status == 'Finished'
+        cur_item[:time_elapsed] = x.get_time_elapsed
       end
 
       cur_item

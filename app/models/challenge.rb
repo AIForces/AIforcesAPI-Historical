@@ -16,9 +16,9 @@ class Challenge < ApplicationRecord
   include Judge
   include ActiveModel::Validations
   default_scope { order(id: :desc) }
-  belongs_to :tournament, optional: true
-  belongs_to :user, optional: true
-  belongs_to :submission, optional: true
+  belongs_to :tournament, optional: true, dependent: :destroy
+  belongs_to :user, optional: true, dependent: :destroy
+  belongs_to :submission, optional: true, dependent: :destroy
   serialize :log
   serialize :state_par
   validates_with MyChallengeValidator

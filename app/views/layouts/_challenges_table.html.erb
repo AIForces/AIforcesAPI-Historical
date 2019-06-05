@@ -1,4 +1,5 @@
-<table class="table is-fullwidth box" style="font-size: 13px">
+<div class="box">
+  <table class="table is-fullwidth" <% if admin %>style="font-size: 11px" <% end %> >
   <colgroup>
     <!--    <col span="1" style="width: 5%;">-->
     <!--    <col span="1" style="width: 10%;">-->
@@ -12,9 +13,6 @@
   <tr>
     <th>ID</th>
     <th>Время создания</th>
-    <th>Длительность проверки</th>
-    <!--      <th>Время тестирования</th>-->
-    <th>Создатель</th>
     <th>Игрок 1</th>
     <th>Игрок 2</th>
     <th>Уровень</th>
@@ -22,9 +20,16 @@
     <th>Вердикт 1</th>
     <th>Вердикт 2</th>
     <th>Победитель</th>
+    <% if admin %>
+      <th>Длительность проверки</th>
+      <th>Создатель</th>
+      <th>Перетест.</th>
+    <% end %>
     <th>Лог</th>
-    <!--      <th>Визулизация</th>-->
     <th>Игра</th>
+    <% if admin %>
+      <th>Удалить</th>
+    <% end %>
   </tr>
   </thead>
   <tbody>
@@ -35,12 +40,6 @@
       </td>
       <td>
         <%= t[:created_at] %>
-      </td>
-      <td>
-        <%= t[:time_elapsed] %>
-      </td>
-      <td>
-        <%= t[:creator] %>
       </td>
       <td>
         <%= t[:player1] %>
@@ -73,9 +72,24 @@
           <%= t[:winner] %>
         </div>
       </td>
+      <% if admin %>
+        <td>
+          <%= t[:time_elapsed] %>
+        </td>
+        <td>
+          <%= t[:creator] %>
+        </td>
+        <td>
+          <a href=<%= challenge_rejudge_url + '?id=' + t[:id].to_s %>>
+            <button class="button is-link">
+              <i class="fas fa-redo"></i>
+            </button>
+          </a>
+        </td>
+      <% end %>
       <td>
         <a href=<%= challenge_log_url + '?id=' + t[:id].to_s %>>
-          <button class="button is-link" <%= "disabled" if t[:status] == 'Тестируется' %>>
+          <button class="button is-link" <%= "disabled" if t[:status].start_with? 'Выполняется' %>>
             <!--            Загрузить log-->
             <i class="fas fa-history"></i>
           </button>
@@ -83,13 +97,23 @@
       </td>
       <td>
         <a href=<%= challenge_visualize_url + '?id=' + t[:id].to_s %>>
-          <button  class="button is-link" <%= "disabled" if t[:status] == 'Тестируется' %>>
+          <button  class="button is-link" <%= "disabled" if t[:status].start_with? 'Выполняется' %>>
             <!--            Визуализация-->
             <i class="fas fa-gamepad"></i>
           </button>
         </a>
       </td>
+      <% if admin %>
+        <td>
+          <a href=<%= challenge_destroy_url + '?id=' + t[:id].to_s %>>
+            <button class="button is-link">
+              <i class="fas fa-trash"></i>
+            </button>
+          </a>
+        </td>
+      <% end %>
     </tr>
   <% end %>
   </tbody>
-</table>
+  </table>
+</div>
