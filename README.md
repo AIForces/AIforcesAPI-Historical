@@ -16,6 +16,9 @@ This application requires:
 * Rails 5.2.2
 * Bundler 2 or greater
 * Postgresql
+* Redis
+* libpq-dev
+* nodejs
 
 Also, you need to install all the necessary gems by running
 ```
@@ -53,9 +56,14 @@ git clone https://github.com/aalekseevx/AIforces.git
 ```
 2) Satisfy all the prerequisites on the remote server and on the local machine.
 3) Change Capistrano settings, like server ip and ssh port, in [config/deploy.rb](config/deploy.rb) file.
+Add server keys to github
 4) Generate ssh keys on your local machine and add them to authorized_keys on your remote server.
 5) Create a user and a database and set them in [config/database.yml](config/database.yml) on your remote server.
 6) Generate SECRET_KEY_BASE and add it to the environmental variables on your remote server.
+TODO: how?
+move master.key
+https://waiyanyoon.com/deploying-rails-5-2-applications-with-encrypted-credentials-using-capistrano/
+Create db AIforces_production
 7) Run initial deploy from your local machine. Try to fix all the errors.
  ```
 capistrano deploy:initial

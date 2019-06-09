@@ -21,6 +21,7 @@ class Challenge < ApplicationRecord
   belongs_to :submission, optional: true, dependent: :destroy
   serialize :log
   serialize :state_par
+  serialize :streams
   validates_with MyChallengeValidator
 
   after_create :init

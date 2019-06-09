@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'challenge/log'
   get 'challenge/visualize'
   get 'challenge/get_info'
+  get 'challenge/get_streams'
   match 'challenge/create' => 'challenge#create', via: :post, as: :challenge_create
   match 'challenge/receive_data' => 'challenge#receive_data', via: :post, as: :challenge_receive_data
   match 'challenge/update_status' => 'challenge#update_status', via: :post, as: :challenge_update_status

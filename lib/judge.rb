@@ -2,11 +2,10 @@
 module Judge
 
   def save_data_from_judge (par)
-    redis = Redis.new
-    redis.del("challenge_status:#{par[:challenge_id]}")
     cur_challenge = Challenge.find_by_id(par[:challenge_id])
-    cur_challenge.status = 'Finished'
     cur_challenge.log = par[:log]
+    cur_challenge.streams = par[:streams]
+    cur_challenge.status = 'Finished'
     cur_challenge.player_1_verdict = par[:verdicts][0]
     cur_challenge.player_2_verdict = par[:verdicts][1]
     cur_challenge.tested_time = DateTime.now
@@ -23,6 +22,8 @@ module Judge
     end
     Rails.logger.debug("going to save")
     cur_challenge.save
+    redis = Redis.new
+    redis.del("challenge_status:#{par[:challenge_id]}")
   end
 
   def send_data_to_judge (send_params)

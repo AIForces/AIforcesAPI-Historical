@@ -12,4 +12,5 @@ class Judge < ApplicationRecord
   def reconfigure
 
   end
+
 end

@@ -20,60 +20,6 @@
     padding-bottom: 20px;
 }
 
-.board {
-    height: 640px;
-    width: 640px;
-    /*margin: 20px;*/
-    border: 15px solid #333;
-}
-
-.square {
-    width: 100%;
-    height: 100%;
-    border-radius: 5px;
-}
-
-.board_basic_cell {
-    float: left;
-    vertical-align: top;
-    display: inline-block;
-    background-color: #fdf5e6;
-    border: 2px solid navajowhite;
-}
-
-.red {
-    background-color: #ff3860;
-    border-radius: 5px;
-}
-
-.red_tail {
-    background-color: #ff3860;
-}
-
-.blue {
-    background-color: #209cee;
-    border-radius: 5px;
-}
-
-.blue_tail {
-    background-color: #209cee;
-}
-
-.block {
-    background-color: gray;
-}
-
-.empty {
-
-}
-
-.player_board {
-    font-family: Courier New, monospace;
-    font-size: 11px;
-    color: black;
-    text-align: center;
-}
-
 .example-input {
     font-family: Courier New, monospace;
     font-size: 18px;

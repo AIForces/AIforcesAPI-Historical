@@ -3,7 +3,7 @@ require 'redis'
 class ChallengeController < ApplicationController
   include Judge
   include ChallengeHelper
-  before_action :set_challenge, only: [:log, :visualize]
+  before_action :set_challenge, only: [:log, :visualize, :get_streams]
   before_action :check_challenge, only: [:log, :visualize]
   before_action :check_logged_in, except: [:receive_data, :update_status]
   before_action :check_admin, only: [:manage, :rejudge]
@@ -58,6 +58,22 @@ class ChallengeController < ApplicationController
       @response[:winner] = Submission.find(x.winner).name
     end
     render json: @response
+  end
+
+  def get_streams
+    streams =  @challenge.streams.slice *params[:streams]
+    streams = streams.to_h.map { |stream, data|
+      [stream, data.slice(*params[:players])]
+    }.to_h
+    if Submission.find(@challenge.sub1).user != current_user and params[:streams].include? 'stderr' and not streams['stderr']['0'].nil?
+      streams['stderr']['0'] = ['[ Нет доступа ]'] * streams['stderr']['0'].length
+      end
+    if Submission.find(@challenge.sub2).user != current_user and params[:streams].include? 'stderr' and not streams['stderr']['1'].nil?
+      streams['stderr']['1'] = ['[ Нет доступа ]'] * streams['stderr']['1'].length
+    end
+
+    render json: streams
+
   end
 
   def visualize
