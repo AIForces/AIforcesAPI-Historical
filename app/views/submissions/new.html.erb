@@ -1,5 +1,15 @@
 <h1 class="title">Отослать код</h1>
 <%= form_tag submissions_create_url do %>
+
+  <div class="field">
+    <div class="label">
+      Название
+    </div>
+    <p class="control">
+      <%= text_field_tag "submission[name]", "", class: "input" %>
+    </p>
+  </div>
+
   <div class="field">
     <div class="label">
       Язык

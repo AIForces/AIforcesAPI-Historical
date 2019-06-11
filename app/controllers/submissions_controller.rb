@@ -14,7 +14,6 @@ class SubmissionsController < ApplicationController
   end
 
   def index
-    @submissions_data = get_data_for_table current_user.submissions
   end
 
   def new
@@ -54,7 +53,6 @@ class SubmissionsController < ApplicationController
   end
 
   def manage
-    @submissions_data = get_data_for_table Submission.all
   end
 
   def destroy
@@ -62,9 +60,16 @@ class SubmissionsController < ApplicationController
     redirect_to submissions_manage_url
   end
 
+  def make_opened
+    x = current_user.submissions.find(params[:id])
+    x.opened = true
+    x.save
+    redirect_to submissions_index_url
+  end
+
   private
     def submission_params
-      params.require(:submission).permit(:compiler, :code)
+      params.require(:submission).permit(:name, :compiler, :code)
     end
 
     def set_submission

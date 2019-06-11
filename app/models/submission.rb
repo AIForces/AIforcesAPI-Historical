@@ -6,10 +6,13 @@ class Submission < ApplicationRecord
   after_create :init
 
   def init
-    # self.status = 'Running'
-    self.name = "#{self.user.username}. ID:#{self.id}"
     self.used_for_tours = 0
     self.used_for_ch = 0
+    self.opened = false
+    self.won = 0
+    self.lost = 0
+    self.drawn = 0
+
     unless Setting.judges_submission.nil?
       self.challenge = Challenge.create(sub1: self.id, sub2: Setting.judges_submission, state_par: {
         level: 1
@@ -17,4 +20,13 @@ class Submission < ApplicationRecord
       self.challenge.save
     end
   end
+
+  def recalculate_stats
+
+  end
+
+  def get_info
+    "#{self.user.username}. ID: #{self.id}. #{self.name}"
+  end
+
 end

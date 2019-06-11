@@ -4,8 +4,8 @@ module ChallengeHelper
     @challenges_data = challenges.map { |x|
       cur_item = {
           id: x.id,
-          player1: Submission.find(x.sub1).name,
-          player2: Submission.find(x.sub2).name,
+          player1: Submission.find(x.sub1).get_info,
+          player2: Submission.find(x.sub2).get_info,
           player1_verdict: x.player_1_verdict,
           player2_verdict: x.player_2_verdict,
           status: x.get_status,

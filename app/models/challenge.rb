@@ -1,14 +1,6 @@
 class MyChallengeValidator < ActiveModel::Validator
   def validate(challenge)
-    if challenge.tournament.nil? and not challenge.user.nil?
-      permitted = challenge.user.get_av_submissions.pluck(:id)
-      unless permitted.include? challenge.sub1
-        challenge.errors[:sub1] << 'Submission 1 is not permitted'
-      end
-      unless permitted.include? challenge.sub2
-        challenge.errors[:sub2] << 'Submission 2 is not permitted'
-      end
-    end
+    # TODO: Create new validator
   end
 end
 

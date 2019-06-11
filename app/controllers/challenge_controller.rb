@@ -16,12 +16,10 @@ class ChallengeController < ApplicationController
 
   def create
     par = challenge_params
-    submission1 = Submission.find_by_name(par[:sub1])
-    submission2 = Submission.find_by_name(par[:sub2])
-
-    @challenge = current_user.challenges.create(sub1: submission1.id, sub2: submission2.id, state_par: {
+    @challenge = current_user.challenges.create(sub1: par[:sub1].to_i, sub2: par[:sub2].to_i, state_par: {
         level: par[:level].to_i
     })
+
     @challenge.save
     redirect_to challenge_index_url
   end
@@ -78,7 +76,9 @@ class ChallengeController < ApplicationController
 
   def visualize
     # @visualizer_html = File.read("storage/games/#{current_event.game.name}/#{current_event.game.visualizer_file}")
-    @visualizer_html = File.read("storage/games/tron/visualizer.html")
+    @visualizer_html = File.read("storage/games/tron/visualizer/visualizer.html")
+    @visualizer_css = File.read("storage/games/tron/visualizer/visualizer.css")
+    @visualizer_js = File.read("storage/games/tron/visualizer/visualizer.js")
   end
 
   def index

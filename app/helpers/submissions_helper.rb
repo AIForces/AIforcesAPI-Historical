@@ -3,10 +3,12 @@ module SubmissionsHelper
     submissions.map {|x|
       cur_item = {
           id: x.id,
+          name: x.name,
           used_for_ch: x.used_for_ch,
           used_for_tours: x.used_for_tours,
           lang: x.compiler,
-          creator: "N/A"
+          creator: "N/A",
+          opened: x.opened
       }
       if x.challenge.nil?
         cur_item[:status] = 'Нет проверки'

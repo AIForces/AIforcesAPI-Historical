@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_08_145700) do
+ActiveRecord::Schema.define(version: 2019_06_10_110146) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,6 +90,10 @@ ActiveRecord::Schema.define(version: 2019_06_08_145700) do
     t.string "name"
     t.boolean "used_for_ch"
     t.boolean "used_for_tours"
+    t.integer "won"
+    t.integer "lost"
+    t.integer "drawn"
+    t.boolean "opened"
     t.index ["user_id"], name: "index_submissions_on_user_id"
   end
 

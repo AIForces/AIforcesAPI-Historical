@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   get 'submissions/source'
   get 'submissions/manage'
   get 'submissions/destroy'
+  get 'submissions/make_opened'
   match "/submit" => "submissions#create", :via => :post, :as => :submissions_create
 
   get 'tournament/index'

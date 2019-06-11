@@ -1,40 +1,182 @@
 <h1 class="title">Новая дуэль</h1>
 
-<%= form_tag challenge_create_url do %>
+
+<div class="section">
+  <h2 class="title is-5">
+    Шаг 1. Выберите свою посылку
+  </h2>
+
+  <h2 class="label">
+    Открытые посылки
+  </h2>
+  <%= render partial: "layouts/submission_table", locals: { submissions_data: (get_data_for_table current_user.submissions.where(opened: true)), admin: false, choose: true, choose_pref: "choose_my_opened" } %>
+
+  <h2 class="label">
+    Закрытые посылки
+  </h2>
+  <%= render partial: "layouts/submission_table", locals: { submissions_data: (get_data_for_table current_user.submissions.where(opened: false)), admin: false, choose: true, choose_pref: "choose_my_closed" } %>
+</div>
+
+<div class="section">
+  <h2 class="title is-5">
+    Шаг 2. Выберите противника
+  </h2>
+
+  <% available_users = (User.all.select { |user| user.submissions.where(opened: true).any? or user == current_user }) %>
   <div class="field">
-    <div class="label">
-      Игрок 1
+    <div class="select is-medium">
+      <select id="opponent_selector" class="input">
+        <% available_users.each do |user| %>
+            <option value="<%= user.username %>"><%= user.username %></option>
+        <% end %>
+      </select>
     </div>
-    <p class="control">
-      <span class="select">
-        <%= select(:challenge, :sub1, (current_user.get_av_submissions).pluck(:name)) %>
-      </span>
-    </p>
   </div>
-  <div class="field">
-    <div class="label">
-      Игрок 2
+</div>
+
+
+<div class="section">
+  <h2 class="title is-5">
+    Шаг 3. Выберите посылку противника
+  </h2>
+
+  <% available_users.each do |user| %>
+    <div class="opponent_subm" id="<%= "avail_#{user.username}" %>" style="display:none;">
+    <% if user == current_user %>
+      <%= render partial: "layouts/submission_table", locals: { submissions_data: (get_data_for_table user.submissions), admin: false, choose: true, choose_pref: "choose_opponent" } %>
+    <% else %>
+      <%= render partial: "layouts/submission_table", locals: { submissions_data: (get_data_for_table user.submissions.where(opened: true)), admin: false, choose: true, choose_pref: "choose_opponent" } %>
+    <% end %>
     </div>
-    <p class="control">
-      <span class="select">
-        <%= select(:challenge, :sub2, (current_user.get_av_submissions).pluck(:name)) %>
-      </span>
-    </p>
-  </div>
-  <div class="field">
-    <div class="label">
-      Уровень
-    </div>
-    <p class="control">
-      <span class="select">
-        <%= select :challenge, :level, [1, 2, 3] %>
-      </span>
-    </p>
-  </div>
+  <% end %>
+</div>
+
+<div class="section">
+  <h2 class="title is-5">
+    Шаг 4. Выберите уровень
+  </h2>
 
   <div class="field">
-    <div class="control">
-      <%= submit_tag "К бою!", class: "button is-link" %>
+    <div class="buttons has-addons">
+      <span id="level_1" class="level button is-info">1</span>
+      <span id="level_2" class="level button">2</span>
+      <span id="level_3" class="level button">3</span>
     </div>
   </div>
-<% end %>
+</div>
+
+
+<div class="section">
+  <h2 class="title is-5">
+    Шаг 5. Выберите, кто ходит первый
+  </h2>
+
+  <div class="field">
+    <div class="buttons has-addons">
+      <span id="order_me" class="order button is-info is-selected">Я</span>
+      <span id="order_opponent" class="order button">Противник</span>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <%= form_tag challenge_create_url, id: "form" do %>
+    <input type="submit" class="fight button is-large is-info" value="К бою!" disabled>
+  <% end %>
+</div>
+
+<script>
+
+  $(document).ready(function() {
+      let cur_level = 1;
+      let cur_order = "order_me";
+      let cur_my_submission = null;
+      let cur_my_opened = null;
+      let cur_opponent_submission = null;
+      redraw_opponent_submissions();
+
+      $(".level").click(function (event) {
+          cur_level = parseInt(event.target.id[6]);
+          $(".level").attr("class", "button");
+          $("#" + event.target.id).attr("class", "level button is-info is-selected");
+      });
+
+      $(".order").click(function (event) {
+          cur_order = event.target.id;
+          $(".order").attr("class", "order button");
+          $("#" + event.target.id).attr("class", "order button is-info is-selected")
+      });
+
+      function get_hidden_input (name, data) {
+          return $("<input>")
+              .attr("type", "hidden")
+              .attr("name", name).val(parseInt(data));
+      }
+
+      $(".fight").click(function (event) {
+          let sub1 = cur_my_submission;
+          let sub2 = cur_opponent_submission;
+          if (cur_order === "order_opponent") {
+              [sub1, sub2] = [sub2, sub1];
+          }
+          $("#form").append(get_hidden_input("challenge[sub1]", sub1));
+          $("#form").append(get_hidden_input("challenge[sub2]", sub2));
+          $("#form").append(get_hidden_input("challenge[level]", cur_level));
+          // event.preventDefault();
+      });
+
+      $(".choose_my_opened").click(function (event) {
+          cur_my_submission = parseInt(event.target.id.substring(".choose_my_opened_".length - 1));
+          cur_my_opened = true;
+
+          $(".choose_my_opened").attr("class", "choose_my_opened button far fa-heart");
+          $(".choose_my_closed").attr("class", "choose_my_opened button far fa-heart");
+          $("#" + event.target.id).attr("class", "choose_my_opened button fas fa-heart");
+
+          $("#opponent_selector").attr("disabled", false);
+
+          redraw_submit_button();
+      });
+
+      $(".choose_my_closed").click(function (event) {
+          cur_my_submission = parseInt(event.target.id.substring(".choose_my_closed_".length - 1));
+          cur_my_opened = false;
+
+          $(".choose_my_opened").attr("class", "choose_my_closed button far fa-heart");
+          $(".choose_my_closed").attr("class", "choose_my_closed button far fa-heart");
+          $("#" + event.target.id).attr("class", "choose_my_closed button fas fa-heart");
+
+          $("#opponent_selector").attr("disabled", true);
+          $("#opponent_selector").val("<%= current_user.username %>");
+          redraw_opponent_submissions();
+          redraw_submit_button();
+      });
+
+      $(".choose_opponent").click(function (event) {
+          cur_opponent_submission = parseInt(event.target.id.substring(".choose_opponent_".length - 1));
+          $(".choose_opponent").attr("class", "choose_opponent button far fa-heart");
+          $("#" + event.target.id).attr("class", "choose_opponent button fas fa-heart");
+          redraw_submit_button();
+      });
+
+      function redraw_submit_button() {
+          console.log("check");
+          if (cur_my_submission === null || cur_opponent_submission === null) {
+              console.log("bad");
+              $(".fight").attr("disabled", true)
+          } else {
+              console.log("good");
+              $(".fight").attr("disabled", false)
+          }
+      }
+
+      function redraw_opponent_submissions() {
+          $(".opponent_subm").attr("style", "display: none;");
+          $("#avail_" + $("#opponent_selector").val()).attr("style", "display: auto");
+      }
+
+      $('#opponent_selector').on('change', function() {
+          redraw_opponent_submissions();
+      });
+  });
+</script>
