@@ -21,7 +21,7 @@ module ChallengeHelper
           cur_item[:winner] = 'N/A'
         end
       else
-        cur_item[:winner] = Submission.find(x.winner).name
+        cur_item[:winner] = Submission.find(x.winner).get_info
       end
 
       unless x.user.nil?
