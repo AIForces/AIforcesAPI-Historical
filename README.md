@@ -13,12 +13,12 @@ These instructions will get you a copy of the project up and running on your loc
 
 This application requires:
 * `Ruby 2.6.1`
-* `Rails 5.2.2
-* Bundler 2 or greater
-* Postgresql 11.2
-* Redis
-* libpq-dev
-* nodejs
+* `Rails 5.2.2`
+* `Bundler 2 or greater`
+* `Postgresql 11.2`
+* `Redis`
+* `libpq-dev`
+* `nodejs`
 
 Also, you need to install all the necessary gems by running
 ```bash
