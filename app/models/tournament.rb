@@ -1,13 +1,14 @@
 class Tournament < ApplicationRecord
+  default_scope { order(id: :desc) }
   has_many :challenges
   serialize :participants
   after_save :add_to_queue
+  belongs_to :event
 
   def get_person_points player
     all_games = self.challenges.where("player1_id = #{player} OR player2_id = #{player}")
     win = all_games.where(winner_id: player).count
     draw = all_games.where(is_draw: true).count
-    Rails.logger.debug("cnt #{win} #{draw}")
     2 * win + draw
   end
 
@@ -25,7 +26,7 @@ class Tournament < ApplicationRecord
     else
       status = 'Закончен'
     end
-    "#{status}. Проведено #{done_cnt} поединков из #{all_cnt}"
+    "#{status}. #{done_cnt}/#{all_cnt}"
   end
 
   def get_info_for_table (player1, player2)

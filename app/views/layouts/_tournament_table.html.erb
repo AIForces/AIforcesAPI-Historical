@@ -1,0 +1,29 @@
+<div class="box">
+  <table class="table is-fullwidth">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Название</th>
+        <th>Статус</th>
+        <th>Время начала</th>
+<!--        <th>Доступ к играм</th>-->
+<!--        <th>Победитель</th>-->
+<!--        <th>Конфигурация</th>-->
+      </tr>
+    </thead>
+    <tbody>
+      <% tournament_data.each do |t| %>
+        <tr>
+          <td><%= t[:id] %></td>
+          <td>
+            <a href="<%= "#{tournament_show_url}?id=#{t[:id]}" %>">
+              <%= t[:name] %>
+            </a>
+          </td>
+          <td><%= t[:status] %></td>
+          <td><%= t[:started_at] %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,6 +1,7 @@
 class Event < ApplicationRecord
   after_create :init
   belongs_to :game
+  has_many :tournaments
 
   def init
     self.rules_file = 'rules.html'

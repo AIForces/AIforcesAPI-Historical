@@ -1,4 +1,6 @@
-# after 'deploy:published', 'deploy:example'
+after 'deploy:published', 'get_example:game'
+after 'deploy:published', 'get_example:event'
+after 'deploy:published', 'get_example:import'
 
 # Change these
 server "95.216.186.109", port: 22, roles: [:web, :app, :db], primary: true
@@ -76,20 +78,41 @@ namespace :deploy do
     end
   end
 
-  desc "Install example"
-  task :example do
-    # Download example game and event
-    on roles :all do
-      run "cd #{deploy_to}/current; RAILS_ENV=production bundle exec rake get_example:game"
-      run "cd #{deploy_to}/current; RAILS_ENV=production bundle exec rake get_example:event"
-      run "cd #{deploy_to}/current; RAILS_ENV=production bundle exec rake get_example:import"
-    end
-  end
-
   before :starting,     :check_revision
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
   after  :finishing,    :restart
+end
+
+namespace :get_example do
+  desc "Install example"
+  task :game do
+    on roles(:all) do
+      within release_path do
+        with rails_env: fetch(:rails_env) do
+          execute :rake, 'get_example:game'
+        end
+      end
+    end
+    end
+  task :event do
+    on roles(:all) do
+      within release_path do
+        with rails_env: fetch(:rails_env) do
+          execute :rake, 'get_example:event'
+        end
+      end
+    end
+    end
+  task :import do
+    on roles(:all) do
+      within release_path do
+        with rails_env: fetch(:rails_env) do
+          execute :rake, 'get_example:import'
+        end
+      end
+    end
+  end
 end
 
 # ps aux | grep puma    # Get puma pid
