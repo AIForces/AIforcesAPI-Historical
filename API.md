@@ -6,6 +6,8 @@
 
 Method: POST
 
+URL: users/create
+
 Arguments:
 
  * username
@@ -30,6 +32,8 @@ Not implemented.
 
 Method: POST
 
+URL: users/auth
+
 Arguments:
 
 * username
@@ -41,6 +45,8 @@ Try to login and create new session.
 
 Method: GET
 
+URL: users/logout
+
 Destroy current session.
 
 ## Challenge
@@ -48,6 +54,8 @@ Destroy current session.
 ### create
 
 Method: POST
+
+URL: challenge/create
 
 Arguments:
 
@@ -62,6 +70,8 @@ Create new challenge.
 
 Method: GET
 
+URL: challenge/destroy
+
 Arguments:
 
 * id
@@ -72,6 +82,8 @@ Destroy challenge
 
 Method: GET
 
+URL: challenge/rejudge
+
 Arguments:
 
 * id
@@ -81,6 +93,8 @@ Rejudge challenge.
 ### log
 
 Method: POST
+
+URL: challenge/log
 
 Arguments:
 
@@ -93,6 +107,8 @@ Get log of the challenge. Ask for json format if you need it.
 
 Method: POST
 
+URL: challenge/get_info
+
 Arguments:
 
 * id
@@ -102,6 +118,8 @@ Get some info about challenge in json format.
 ### get_streams
 
 Method: POST
+
+URL: challenge/get_streams
 
 Arguments:
 
@@ -115,6 +133,8 @@ Get stdin/stdout/stderr output of the challenge submissions.
 
 Method: POST
 
+URL: challenge/receive_data
+
 Arguments:
 * challenge_id
 * player1_verdict 
@@ -127,6 +147,8 @@ Receive log from judge
 ### update_status
 
 Method: POST
+
+URL: challenge/update_status
 
 Arguments:
 
@@ -149,6 +171,8 @@ Not implemented.
 
 Method: POST
 
+URL: submissions/create
+
 Arguments:
 
 * name
@@ -161,6 +185,8 @@ Create new submission
 
 Method: GET
 
+URL: submissions/destroy
+
 Arguments:
 
 * id
@@ -171,6 +197,8 @@ Destroy submission.
 
 Method: GET
 
+URL: submissions/make_used_for_tours
+
 Arguments:
 * id
 
@@ -179,6 +207,8 @@ Make submission used for tours.
 ### make_opened
 
 Method: GET
+
+URL: submissions/make_opened
 
 Arguments:
 * id
@@ -189,6 +219,8 @@ Make submission opened for others.
 
 ### create
 Method: POST
+
+URL: tournament/create
 
 Arguments:
 
