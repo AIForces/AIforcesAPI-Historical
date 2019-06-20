@@ -72,7 +72,10 @@ class SubmissionsController < ApplicationController
   end
 
   def show_spa
-    render json: (get_info_subm @submission, params[:keys])
+    render json: (get_info ({
+      submission: @submission,
+      keys: params[:keys]
+    }))
   end
 
   private
