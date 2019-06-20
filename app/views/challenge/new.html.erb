@@ -9,12 +9,12 @@
   <h2 class="label">
     Открытые посылки
   </h2>
-  <%= render partial: "layouts/submission_table", locals: { submissions_data: (get_data_for_table current_user.submissions.where(opened: true)), admin: false, choose: true, choose_pref: "choose_my_opened" } %>
+  <%= render partial: "layouts/submission_table", locals: { submissions_data: (get_data_for_table current_user.submissions.where(opened: true), nil), admin: false, choose: true, choose_pref: "choose_my_opened" } %>
 
   <h2 class="label">
     Закрытые посылки
   </h2>
-  <%= render partial: "layouts/submission_table", locals: { submissions_data: (get_data_for_table current_user.submissions.where(opened: false)), admin: false, choose: true, choose_pref: "choose_my_closed" } %>
+  <%= render partial: "layouts/submission_table", locals: { submissions_data: (get_data_for_table current_user.submissions.where(opened: false), nil), admin: false, choose: true, choose_pref: "choose_my_closed" } %>
 </div>
 
 <div class="section">
@@ -43,9 +43,9 @@
   <% available_users.each do |user| %>
     <div class="opponent_subm" id="<%= "avail_#{user.username}" %>" style="display:none;">
     <% if user == current_user %>
-      <%= render partial: "layouts/submission_table", locals: { submissions_data: (get_data_for_table user.submissions), admin: false, choose: true, choose_pref: "choose_opponent" } %>
+      <%= render partial: "layouts/submission_table", locals: { submissions_data: (get_data_for_table user.submissions, nil), admin: false, choose: true, choose_pref: "choose_opponent" } %>
     <% else %>
-      <%= render partial: "layouts/submission_table", locals: { submissions_data: (get_data_for_table user.submissions.where(opened: true)), admin: false, choose: true, choose_pref: "choose_opponent" } %>
+      <%= render partial: "layouts/submission_table", locals: { submissions_data: (get_data_for_table user.submissions.where(opened: true), nil), admin: false, choose: true, choose_pref: "choose_opponent" } %>
     <% end %>
     </div>
   <% end %>

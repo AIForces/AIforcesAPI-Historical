@@ -1,6 +1,6 @@
 class SubmissionsController < ApplicationController
   before_action :check_logged_in
-  before_action :set_submission, only: [:source]
+  before_action :set_submission, only: [:source, :source_spa, :show_spa]
   before_action :check_submission_id, only: [:source]
   before_action :check_admin, only: [:manage, :destroy]
   include SubmissionsHelper
@@ -65,6 +65,14 @@ class SubmissionsController < ApplicationController
     x.opened = true
     x.save
     redirect_to submissions_index_url
+  end
+
+  def index_spa
+    render json: (get_data_for_table current_user.submissions, params[:keys])
+  end
+
+  def show_spa
+    render json: (get_info_subm @submission, params[:keys])
   end
 
   private

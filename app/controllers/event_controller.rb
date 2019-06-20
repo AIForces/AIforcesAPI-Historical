@@ -10,4 +10,5 @@ class EventController < ApplicationController
     g = current_event.game
     @statement_html = File.read("storage/games/#{g.name}/#{g.statement_file}")
   end
+
 end

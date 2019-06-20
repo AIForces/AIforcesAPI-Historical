@@ -83,7 +83,7 @@ class ChallengeController < ApplicationController
 
   def index
     challenges = Challenge.where(tournament: nil, user_id: current_user.id)
-    @challenges_data = get_data_for_index challenges
+    @challenges_data = get_data_for_index challenges, nil
   end
 
   def receive_data
@@ -106,6 +106,16 @@ class ChallengeController < ApplicationController
     redirect_to challenge_manage_url
   end
 
+  def index_spa
+    render json: (get_data_for_index current_user.challenges, params[:keys])
+  end
+
+  def show_spa
+    render json: (get_info_ch ({
+        challenge: current_user.challenges.find(params[:id]),
+        keys: params[:keys]}))
+  end
+
   private
     def set_challenge
       @challenge = Challenge.find(params[:id])
@@ -120,7 +130,7 @@ class ChallengeController < ApplicationController
     end
 
     def challenge_params
-      params.require(:challenge).permit(:sub1, :sub2, :level)
+        params.require(:challenge).permit(:sub1, :sub2, :level)
     end
 
     def check_trusted_ip
@@ -134,7 +144,7 @@ class ChallengeController < ApplicationController
     end
 
     def rec_params
-      params.permit :challenge_id, :player1_verdict, :player2_verdict, :winner, :log
+        params.permit :challenge_id, :player1_verdict, :player2_verdict, :winner, :log
     end
 
     def id_params

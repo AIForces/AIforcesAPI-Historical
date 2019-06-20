@@ -115,14 +115,6 @@
 </div>
 
 <script>
-    $(".ch_but").click(function (event) {
-        let target_id = event.target.parentElement.id;
-        let id = parseInt(target_id.slice("ch_but_".length));
-        $.get("<%= submissions_make_used_for_ch_url %>", {id: id}, function() {
-            $(".ch_but").html("<i class=\"far fa-heart\"></i>");
-            $("#" + target_id).html("<i class=\"fas fa-heart\"></i>")
-        })
-    });
 
     $(".tour_but").click(function (event) {
         let target_id = event.target.parentElement.id;

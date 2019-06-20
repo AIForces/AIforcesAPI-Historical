@@ -20,13 +20,12 @@ Rails.application.routes.draw do
 
   get 'submissions/index'
   get 'submissions/new'
-  get 'submissions/make_used_for_ch'
   get 'submissions/make_used_for_tours'
   get 'submissions/source'
   get 'submissions/manage'
   get 'submissions/destroy'
   get 'submissions/make_opened'
-  match "/submit" => "submissions#create", :via => :post, :as => :submissions_create
+  match "submissions/create" => "submissions#create", :via => :post, :as => :submissions_create
 
   get 'tournament/index'
   get 'tournament/new'
@@ -37,11 +36,26 @@ Rails.application.routes.draw do
 
   get 'login', to: 'sessions#new', as: :sessions_new
   get 'logout', to: 'sessions#destroy', as: :sessions_destroy
-  match "/auth" => "sessions#create", :via => :post, :as => :sessions_create
+  match "auth" => "sessions#create", :via => :post, :as => :sessions_create
 
-  get 'signup', to: "users#new", as: :users_new
+  get 'users/new', to: "users#new", as: :users_new
   match "users/create" => "users#create", :via => :post, :as => :users_create
 
   root :to => redirect('/login')
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+
+  # New API for SPA frontend
+
+  get 'api/submissions/', to: 'submissions#index_spa'
+  get 'api/submissions/:id', to: 'submissions#show_spa'
+
+  get 'api/event/rules', to: 'submissions#rules_spa'
+  get 'api/event/statements', to: 'event#statements_spa'
+
+  get 'api/challenges', to: 'challenge#index_spa'
+  get 'api/challenges/:id', to: 'challenge#show_spa'
+
+  get 'api/tournaments/', to: 'tournaments#index_spa'
+  get 'api/tournaments/:id', to: 'tournaments#show_spa'
 end

@@ -1,2 +1,2 @@
 <h1 class="title">Мои посылки</h1>
-<%= render partial: 'layouts/submission_table', locals: { submissions_data: (get_data_for_table current_user.submissions), admin: false, choose: false } %>
+<%= render partial: 'layouts/submission_table', locals: { submissions_data: (get_data_for_table current_user.submissions, nil), admin: false, choose: false } %>
