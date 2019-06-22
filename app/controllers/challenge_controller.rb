@@ -25,7 +25,7 @@ class ChallengeController < ApplicationController
   end
 
   def manage
-    @challenges_data = get_data_for_index Challenge.where(tournament_id: nil)
+    @challenges_data = get_data_for_index Challenge.where(tournament_id: nil), nil
   end
 
   def log

@@ -58,4 +58,6 @@ Rails.application.routes.draw do
 
   get 'api/tournaments/', to: 'tournaments#index_spa'
   get 'api/tournaments/:id', to: 'tournaments#show_spa'
+
+    match 'api/users/create', to: 'users#create_spa', via: :post
 end

@@ -9,11 +9,19 @@ class UsersController < ApplicationController
       render 'users/new'
     end
     @user = User.new(user_params)
-    @user.role = 'user'
     if @user.save
       redirect_to sessions_new_url
     else
       redirect_to users_new_url, notice: @user.errors.full_messages
+    end
+  end
+
+  def create_spa
+    @user = User.new(user_params)
+    if @user.save
+      head :ok
+    else
+      render json: @user.errors.full_messages, status: :bad_request
     end
   end
 
