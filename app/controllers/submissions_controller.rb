@@ -13,6 +13,15 @@ class SubmissionsController < ApplicationController
     end
   end
 
+  def create_spa
+    @submission = current_user.submissions.create(submission_params)
+    if @submission.save
+      head :ok
+    else
+      render json: { errors: @submission.errors.full_messages }, status: :bad_request
+    end
+  end
+
   def index
   end
 

@@ -24,6 +24,19 @@ class ChallengeController < ApplicationController
     redirect_to challenge_index_url
   end
 
+  def create_spa
+    par = challenge_params
+    @challenge = current_user.challenges.create(sub1: par[:sub1].to_i, sub2: par[:sub2].to_i, state_par: {
+        level: par[:level].to_i
+    })
+
+    if @challenge.save
+      head :ok
+    else
+      render json: { errors: @challenge.errors.full_messages}, status: :bad_request
+    end
+  end
+
   def manage
     @challenges_data = get_data_for_index Challenge.where(tournament_id: nil), nil
   end
