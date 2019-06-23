@@ -61,6 +61,13 @@
       <span id="level_1" class="level button is-info">1</span>
       <span id="level_2" class="level button">2</span>
       <span id="level_3" class="level button">3</span>
+      <span id="level_4" class="level button">4</span>
+      <span id="level_5" class="level button">5</span>
+      <span id="level_6" class="level button">6</span>
+      <span id="level_7" class="level button">7</span>
+      <span id="level_8" class="level button">8</span>
+      <span id="level_9" class="level button">9</span>
+      <span id="level_10" class="level button">10</span>
     </div>
   </div>
 </div>
@@ -96,7 +103,7 @@
       redraw_opponent_submissions();
 
       $(".level").click(function (event) {
-          cur_level = parseInt(event.target.id[6]);
+          cur_level = parseInt(event.target.id.substring(6));
           $(".level").attr("class", "button");
           $("#" + event.target.id).attr("class", "level button is-info is-selected");
       });

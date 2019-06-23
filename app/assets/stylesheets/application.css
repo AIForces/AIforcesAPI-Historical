@@ -14,7 +14,26 @@
  *= require_self
  */
 
-
+@font-face {
+    font-family: "Computer Modern";
+    src: url('http://mirrors.ctan.org/fonts/cm-unicode/fonts/otf/cmunss.otf');
+}
+@font-face {
+    font-family: "Computer Modern";
+    src: url('http://mirrors.ctan.org/fonts/cm-unicode/fonts/otf/cmunsx.otf');
+    font-weight: bold;
+}
+@font-face {
+    font-family: "Computer Modern";
+    src: url('http://mirrors.ctan.org/fonts/cm-unicode/fonts/otf/cmunsi.otf');
+    font-style: italic, oblique;
+}
+@font-face {
+    font-family: "Computer Modern";
+    src: url('http://mirrors.ctan.org/fonts/cm-unicode/fonts/otf/cmunbxo.otf');
+    font-weight: bold;
+    font-style: italic, oblique;
+}
 .section {
     padding: 10px;
     padding-bottom: 20px;
@@ -22,9 +41,15 @@
 
 .example-input {
     font-family: Courier New, monospace;
-    font-size: 18px;
+    font-size: 13px;
     color: black;
-    text-align: center;
+    text-align: left;
+
+}
+
+.example-box {
+    display: inline-block;
+    width: 300px;
 }
 
 .ok_verdict {
