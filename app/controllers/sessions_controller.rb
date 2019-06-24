@@ -16,12 +16,18 @@ class SessionsController < ApplicationController
   end
 
   def create_spa
-    user = User.find_by_username(params[:username])
-    if user && user.authenticate(params[:password])
+    par = session_params
+    user = User.find_by_username(par[:username])
+
+    if user.nil?
+      render json: { errors: ["User not found"] }, status: :bad_request
+    end
+
+    if user && user.authenticate(par[:password])
       session[:user_id] = user.id
       head :ok
     else
-      render json: { errors: user.errors.full_messages }, status: :bad_request
+      render json: { errors: ["Incorrect password"]}, status: :bad_request
     end
   end
 
@@ -33,5 +39,11 @@ class SessionsController < ApplicationController
   def destroy_spa
     session[:user_id] = nil
     head :ok
+  end
+
+  private
+
+  def session_params
+    params.require(session).permit(:username, :password)
   end
 end
