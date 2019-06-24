@@ -21,6 +21,7 @@ class SessionsController < ApplicationController
 
     if user.nil?
       render json: { errors: ["User not found"] }, status: :bad_request
+      return
     end
 
     if user && user.authenticate(par[:password])
