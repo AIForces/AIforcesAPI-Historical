@@ -2,7 +2,6 @@ require 'net/http'
 require 'json'
 
 class JudgeController < ApplicationController
-  skip_before_action :verify_authenticity_token
   before_action :check_trusted_ip
   force_ssl except: [:receive_data, :receive_status]
   include Judge
