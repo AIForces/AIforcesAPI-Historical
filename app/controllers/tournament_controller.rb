@@ -1,5 +1,4 @@
 class TournamentController < ApplicationController
-  skip_before_action :verify_authenticity_token
   before_action :set_tournament, only: [:show]
   before_action :check_logged_in
   include ChallengeHelper
@@ -8,7 +7,7 @@ class TournamentController < ApplicationController
   end
 
   def show
-    @challenges_data = get_data_for_index @tournament.challenges
+    @challenges_data = get_data_for_index @tournament.challenges, nil
   end
 
   def new

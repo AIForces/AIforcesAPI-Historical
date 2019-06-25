@@ -1,5 +1,5 @@
 module TournamentHelper
-  def get_tour_data_for_table (tournaments)
+  def get_tour_data_for_table_tr (tournaments)
     tournaments.map {|x|
       cur_item = {
           id: x.id,

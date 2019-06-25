@@ -7,7 +7,7 @@ class ChallengeController < ApplicationController
   before_action :check_challenge, only: [:log, :visualize]
   before_action :check_logged_in, except: [:receive_data, :update_status]
   before_action :check_admin, only: [:manage, :rejudge]
-  skip_before_action :verify_authenticity_token, only: [:receive_data, :update_status]
+  # skip_before_action :verify_authenticity_token, only: [:receive_data, :update_status]
   before_action :check_trusted_ip, only: [:receive_data, :update_status]
   # force_ssl except: [:receive_data, :update_status]
 
