@@ -16,5 +16,9 @@ namespace :get_example do
     Rake::Task["import_data:game"].invoke("tron")
     Rake::Task["import_data:event"].invoke("tron_event")
     Setting.default_event = Event.last.id
+    Tournament.all.map { |x|
+      x.event = Event.find(Setting.default_event)
+      x.save
+    }
   end
 end
