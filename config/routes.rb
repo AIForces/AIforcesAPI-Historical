@@ -42,16 +42,15 @@ Rails.application.routes.draw do
   match "users/create" => "users#create", :via => :post, :as => :users_create
 
   root :to => redirect('/login')
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-
 
   # New API for SPA frontend
 
   get 'api/submissions/', to: 'submissions#index_spa'
   get 'api/submissions/:id', to: 'submissions#show_spa'
 
-  get 'api/event/rules', to: 'submissions#rules_spa'
+  get 'api/event/rules', to: 'event#rules_spa'
   get 'api/event/statements', to: 'event#statements_spa'
+  get 'api/event/visualizer', to: 'event#visualizer_spa'
 
   get 'api/challenges', to: 'challenge#index_spa'
   get 'api/challenges/:id', to: 'challenge#show_spa'
