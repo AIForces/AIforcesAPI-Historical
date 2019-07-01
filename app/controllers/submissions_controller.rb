@@ -31,19 +31,6 @@ class SubmissionsController < ApplicationController
   def show
   end
 
-  def make_used_for_ch
-    new_fav_id = params[:id]
-    unless current_user.fav_ch_id.nil?
-      last_subm = Submission.find_by_id current_user.fav_ch_id
-      last_subm.used_for_ch = nil
-      last_subm.save
-    end
-    current_user.update!(fav_ch_id: new_fav_id)
-    cur_subm = Submission.find_by_id(params[:id])
-    cur_subm.used_for_ch = true
-    cur_subm.save
-  end
-
   def make_used_for_tours
     new_fav_id = params[:id]
     unless current_user.fav_tours_id.nil?
@@ -55,6 +42,7 @@ class SubmissionsController < ApplicationController
     cur_subm = Submission.find_by_id(params[:id])
     cur_subm.used_for_tours = true
     cur_subm.save
+    head :ok
   end
 
   def source

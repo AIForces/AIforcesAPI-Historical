@@ -119,7 +119,7 @@
     $(".tour_but").click(function (event) {
         let target_id = event.target.parentElement.id;
         let id = parseInt(target_id.slice("tour_but_".length));
-        $.get("<%= submissions_make_used_for_tours_url %>", {id: id}, function() {
+        $.post("/api/submissions/" + id + "/make_primary", function() {
             $(".tour_but").html("<i class=\"far button fa-heart\"></i>");
             $("#" + target_id).html("<i class=\"fas button fa-heart\"></i>")
         })
@@ -130,7 +130,7 @@
         console.log(target_id);
         let id = parseInt(target_id.slice("make_opened_".length));
         if (confirm('Вы уверены, что хотите открыть эту посылку? Это действие невозможно отменить.')) {
-            $.get("<%= submissions_make_opened_url %>", {id: id}, function () {
+            $.post("/api/submissions/" + id + '/make_public', function () {
                 $("#"+ target_id).attr("class", "button fas fa-lock-open");
                 $("#"+ target_id).attr("disabled", true);
             })

@@ -47,6 +47,8 @@ Rails.application.routes.draw do
 
   get 'api/submissions/', to: 'submissions#index_spa'
   get 'api/submissions/:id', to: 'submissions#show_spa'
+  match 'api/submissions/:id/make_public', to: 'submissions#make_opened', via: :post
+  match 'api/submissions/:id/make_primary', to: 'submissions#make_used_for_tours', via: :post
 
   get 'api/event/rules', to: 'event#rules_spa'
   get 'api/event/statements', to: 'event#statements_spa'
@@ -63,5 +65,4 @@ Rails.application.routes.draw do
   match 'api/submissions/create', to: 'submissions#create_spa', via: :post
   match 'api/sessions/create', to: 'sessions#create_spa', via: :post
   match 'api/sessions/destroy', to: 'sessions#destroy_spa', via: :post
-
 end
