@@ -61,7 +61,7 @@ class SubmissionsController < ApplicationController
     x = current_user.submissions.find(params[:id])
     x.opened = true
     x.save
-    redirect_to submissions_index_url
+    head :ok
   end
 
   def index_spa
