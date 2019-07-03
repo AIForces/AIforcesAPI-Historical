@@ -32,6 +32,14 @@ class SessionsController < ApplicationController
     end
   end
 
+  def current
+    if current_user.nil?
+      render json: { logged_in: false }
+    else
+      render json: { logged_in: true, id: current_user.id }
+    end
+  end
+
   def destroy
     session[:user_id] = nil
     redirect_to sessions_new_url
