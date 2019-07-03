@@ -35,7 +35,7 @@ class SubmissionsController < ApplicationController
     new_fav_id = params[:id]
     unless current_user.fav_tours_id.nil?
       last_subm = Submission.find_by_id current_user.fav_tours_id
-      last_subm.used_for_tours = nil
+      last_subm.used_for_tours = false
       last_subm.save
     end
     current_user.update(fav_tours_id: new_fav_id)
@@ -65,7 +65,11 @@ class SubmissionsController < ApplicationController
   end
 
   def index_spa
-    render json: (get_data_for_table current_user.submissions, params[:keys])
+    render json: (current_user.submissions.map { |x|
+      get_info ({
+          submission: x,
+          keys: params[:keys]
+      })})
   end
 
   def show_spa
@@ -73,6 +77,10 @@ class SubmissionsController < ApplicationController
       submission: @submission,
       keys: params[:keys]
     }))
+  end
+
+  def public
+    render json: { ids: User.find(params[:id]).submissions.where(opened: true).pluck(:id) }
   end
 
   private

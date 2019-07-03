@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :check_registration_is_open, only: [:create]
+  before_action :set_user, only: [:show]
   def new
     @user = User.new
   end
@@ -23,6 +24,15 @@ class UsersController < ApplicationController
     else
       render json: { errors: @user.errors.full_messages }, status: :bad_request
     end
+  end
+
+  def show
+    render json: {
+        id: @user.id,
+        username: @user.username,
+        name: @user.name,
+        surname: @user.surname,
+    }
   end
 
   private

@@ -29,4 +29,8 @@ class EventController < ApplicationController
 
     render inline: "#{vis_html}<style>#{vis_css}</style><script>#{vis_js}</script>"
   end
+
+  def participants
+    render json: { ids: User.all.pluck(:id)  }
+  end
 end
