@@ -6,8 +6,6 @@ Rails.application.routes.draw do
   get 'challenge/destroy'
   get 'challenge/log'
   get 'challenge/visualize'
-  get 'challenge/get_info'
-  get 'challenge/get_streams'
   match 'challenge/create' => 'challenge#create', via: :post, as: :challenge_create
   match 'challenge/receive_data' => 'challenge#receive_data', via: :post, as: :challenge_receive_data
   match 'challenge/update_status' => 'challenge#update_status', via: :post, as: :challenge_update_status
@@ -60,6 +58,8 @@ Rails.application.routes.draw do
   get 'api/challenges', to: 'challenge#index_spa'
   match 'api/challenge/create', to: 'challenge#create_spa', via: :post
   get 'api/challenges/:id', to: 'challenge#show_spa'
+  get 'api/challenge/get_info'
+  get 'api/challenge/get_streams'
 
   get 'api/tournaments/', to: 'tournaments#index_spa'
   get 'api/tournaments/:id', to: 'tournaments#show_spa'
