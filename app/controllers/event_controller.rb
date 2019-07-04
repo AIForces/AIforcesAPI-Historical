@@ -42,6 +42,14 @@ class EventController < ApplicationController
   end
 
   def participants
-    render json: { ids: User.all.pluck(:id)  }
+    render json: { ids: User.all.map { |x|
+        {
+          id: x.id,
+          username: x.username,
+          name: x.name,
+          surname: x.surname
+        }
+      }
+    }
   end
 end
