@@ -13,7 +13,7 @@ class EventController < ApplicationController
 
   def rules_spa
     html = File.read("storage/events/#{current_event.name}/#{current_event.rules_file}")
-    render render json: {
+    render json: {
         html: html,
         json: ""
     }
