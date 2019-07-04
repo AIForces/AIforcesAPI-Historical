@@ -56,10 +56,10 @@ Rails.application.routes.draw do
   get 'api/event/participants', to: 'event#participants'
 
   get 'api/challenges', to: 'challenge#index_spa'
-  match 'api/challenge/create', to: 'challenge#create_spa', via: :post
+  match 'api/challenges/create', to: 'challenge#create_spa', via: :post
   get 'api/challenges/:id', to: 'challenge#show_spa'
-  get 'api/challenge/get_info'
-  get 'api/challenge/get_streams'
+  get 'api/challenge/get_info', to: 'challenge#get_info'
+  get 'api/challenge/get_streams', to: 'challenge#get_streams'
 
   get 'api/tournaments/', to: 'tournaments#index_spa'
   get 'api/tournaments/:id', to: 'tournaments#show_spa'
