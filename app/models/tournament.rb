@@ -37,22 +37,63 @@ class Tournament < ApplicationRecord
     [w1, draw, w2]
   end
 
+  def get_complete_data
+    resp = {}
+    self.participants.each do |player1_id|
+      resp[player1_id] = {}
+      self.participants.each do |player2_id|
+        player1 = User.find(player1_id)
+        player2 = User.find(player2_id)
+        resp[player1_id][player2_id] = get_info_for_table player1, player2
+      end
+    end
+    resp
+  end
   def add_to_queue
-    # WTF is that?
-    Rails.logger.debug("add to q")
+    state_pars = [
+        {
+            level: 1
+        },
+        {
+            level: 2
+        },
+        {
+            level: 3
+        },
+        {
+            level: 4
+        },
+        {
+            level: 5
+        },
+        {
+            level: 6
+        },
+        {
+            level: 7
+        },
+        {
+            level: 8
+        },
+        {
+            level: 9
+        },
+        {
+            level: 10
+        },
+    ]
     if self.challenges.empty?
       self.participants.each do |player1_id|
         self.participants.each do |player2_id|
           if player1_id != player2_id
             player1 = User.find(player1_id)
             player2 = User.find(player2_id)
-            Rails.logger.debug("adding to chals #{player1_id}, #{player2_id}")
-            self.number_of_ch_per_pair.times do
-                next_chal = self.challenges.create(sub1: player1.fav_tours_id, sub2: player2.fav_tours_id, state_par: {
-                    level: 2
-                })
-                next_chal.save
-            end
+            state_pars.each { |conf|
+              self.number_of_ch_per_pair.times do
+                  next_chal = self.challenges.create(sub1: player1.fav_tours_id, sub2: player2.fav_tours_id, state_par: conf)
+                  next_chal.save
+              end
+            }
           end
         end
       end

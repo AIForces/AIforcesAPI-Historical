@@ -29,6 +29,29 @@ class TournamentController < ApplicationController
     end
   end
 
+  def index_spa
+    render json: (Tournament.all.map { |x|
+      {
+        id: x.id,
+        name: x.name,
+        status: x.get_status,
+        start_at: (x.created_at.to_formatted_s :long)
+      }
+    })
+  end
+
+  def show_spa
+    render json: ([Tournament.find(params[:id])].map { |x|
+      {
+          id: x.id,
+          name: x.name,
+          status: x.get_status,
+          start_at: (x.created_at.to_formatted_s :long),
+          data: x.get_complete_data
+      }
+    }[0])
+  end
+
   private
 
   def tournament_params

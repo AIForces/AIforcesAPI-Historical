@@ -61,8 +61,8 @@ Rails.application.routes.draw do
   get 'api/challenge/get_info', to: 'challenge#get_info'
   get 'api/challenge/get_streams', to: 'challenge#get_streams'
 
-  get 'api/tournaments/', to: 'tournaments#index_spa'
-  get 'api/tournaments/:id', to: 'tournaments#show_spa'
+  get 'api/tournaments/', to: 'tournament#index_spa'
+  get 'api/tournaments/:id', to: 'tournament#show_spa'
 
   match 'api/users/create', to: 'users#create_spa', via: :post
   get 'api/users/:id', to: 'users#show'
