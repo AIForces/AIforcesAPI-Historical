@@ -12,7 +12,8 @@ module ChallengeHelper
         created_at: x.created_at.to_formatted_s(:short),
         level: x.state_par[:level],
         creator: 'N/A',
-        time_elapsed: 'N/A'
+        time_elapsed: 'N/A',
+        log: x.log
     }
     if x.winner.nil?
       if x.is_draw
