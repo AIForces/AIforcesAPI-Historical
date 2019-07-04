@@ -15,7 +15,7 @@ class EventController < ApplicationController
     html = File.read("storage/events/#{current_event.name}/#{current_event.rules_file}")
     render json: {
         html: html,
-        json: ""
+        js: ""
     }
   end
 
@@ -26,7 +26,7 @@ class EventController < ApplicationController
     js = File.read("storage/games/#{g.name}/statement.js")
     render json: {
         html: "#{html}<style>#{css}</style>",
-        json: js
+        js: js
     }
   end
 
@@ -37,7 +37,7 @@ class EventController < ApplicationController
 
     render json: {
         html: "#{vis_html}<style>#{vis_css}</style>",
-        json: vis_js
+        js: vis_js
     }
   end
 
