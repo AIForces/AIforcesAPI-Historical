@@ -1,6 +1,7 @@
 class SubmissionsController < ApplicationController
-  before_action :check_logged_in
-  before_action :set_submission, only: [:source, :source_spa, :show_spa]
+  before_action :check_logged_in #, only: [:create, :index, :new, :show, :source, :manage, :destroy]
+  # before_action :check_logged_in_api, only: [:create_spa, :make_used_for_tours, :make_opened, :index_spa, :show_spa]
+  before_action :set_submission, only: [:source, :show_spa]
   before_action :check_submission_id, only: [:source]
   before_action :check_admin, only: [:manage, :destroy]
   include SubmissionsHelper
