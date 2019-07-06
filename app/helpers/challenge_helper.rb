@@ -13,8 +13,12 @@ module ChallengeHelper
         level: x.state_par[:level],
         creator: 'N/A',
         time_elapsed: 'N/A',
-        log: x.log
     }
+
+    if not keys.nil? and keys.include? :log
+      cur_item[:log] = x.log
+    end
+
     if x.winner.nil?
       if x.is_draw
         cur_item[:winner] = 'Ничья'

@@ -10,8 +10,12 @@ module SubmissionsHelper
         creator: "N/A",
         opened: x.opened,
         primary: x.used_for_tours,
-        code: x.code
     }
+
+    if not keys.nil? and keys.include? :code
+      cur_item[:code] = x.code
+    end
+
     if x.challenge.nil?
       cur_item[:status] = 'Нет проверки'
       cur_item[:verdict] = 'N/A'
