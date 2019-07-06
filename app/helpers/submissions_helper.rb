@@ -12,7 +12,7 @@ module SubmissionsHelper
         primary: x.used_for_tours,
     }
 
-    if not keys.nil? and keys.include? :code
+    if not keys.nil? and keys.include? "code"
       cur_item[:code] = x.code
     end
 

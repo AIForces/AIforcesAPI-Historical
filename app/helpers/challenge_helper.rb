@@ -15,7 +15,7 @@ module ChallengeHelper
         time_elapsed: 'N/A',
     }
 
-    if not keys.nil? and keys.include? :log
+    if not keys.nil? and keys.include? "log"
       cur_item[:log] = x.log
     end
 

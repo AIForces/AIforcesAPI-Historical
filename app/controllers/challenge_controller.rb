@@ -102,7 +102,7 @@ class ChallengeController < ApplicationController
   def receive_data
     params.permit!
     save_data_from_judge params
-    render text: ""
+    head :ok
   end
 
   def update_status
