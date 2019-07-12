@@ -100,4 +100,9 @@ Rails.application.configure do
   # Disabling useless logging
   # config.active_record.logger = nil
   config.action_view.logger = nil
+
+  config.after_initialize do
+    ActiveRecord::Base.logger = Rails.logger.clone
+    ActiveRecord::Base.logger.level = Logger::INFO
+  end
 end
