@@ -20,18 +20,6 @@
 #
 env 'CRON_TZ', 'Europe/Moscow'
 
-every :day, at: "12:00" do
-  rake "tournament_regular:morning"
-end
-
-every :day, at: "15:00" do
-  rake "tournament_regular:afternoon"
-end
-
-every :day, at: "20:00" do
-  rake "tournament_regular:evening"
-end
-
 every :day, at: "00:00"  do
   rake "tournament_regular:night"
   end

@@ -30,10 +30,9 @@ class Tournament < ApplicationRecord
   end
 
   def get_info_for_table (player1, player2)
-    all_games = self.challenges.where(player1_id: player1, player2_id: player2)
-    w1 = all_games.where(winner_id: player1).count
-    draw = all_games.where(is_draw: true).count
-    w2 = all_games.where(winner_id: player2).count
+    w1 = self.challenges.where(player1_id: player1, player2_id: player2, winner_id: player1).count
+    draw = self.challenges.where(player1_id: player1, player2_id: player2, is_draw: true).count
+    w2 = self.challenges.where(player1_id: player1, player2_id: player2, winner_id: player2).count
     [w1, draw, w2]
   end
 
