@@ -142,7 +142,7 @@ class ChallengeController < ApplicationController
           end
         end
 
-        unless challenge.user == current_user
+        unless @challenge.user == current_user
           head :forbidden
         end
       end
