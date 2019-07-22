@@ -3,8 +3,8 @@ require 'redis'
 class ChallengeController < ApplicationController
   include Judge
   include ChallengeHelper
-  before_action :set_challenge, only: [:log, :visualize, :get_streams]
-  before_action :check_challenge, only: [:log, :visualize]
+  before_action :set_challenge, only: [:log, :visualize, :get_streams, :show_spa]
+  before_action :check_challenge, only: [:log, :visualize, :show_spa]
   before_action :check_logged_in, except: [:receive_data, :update_status]
   before_action :check_admin, only: [:manage, :rejudge]
   # skip_before_action :verify_authenticity_token, only: [:receive_data, :update_status]
@@ -125,7 +125,7 @@ class ChallengeController < ApplicationController
 
   def show_spa
     render json: (get_info_ch ({
-        challenge: current_user.challenges.find(params[:id]),
+        challenge: @challenge,
         keys: params[:keys]}))
   end
 
@@ -135,8 +135,14 @@ class ChallengeController < ApplicationController
     end
 
     def check_challenge
-      unless @challenge.tournament.nil?
-        if current_user.role != 'admin' and not Setting.tournament_logs_open
+      unless current_user.role == 'admin'
+        unless @challenge.tournament.nil?
+            unless Setting.tournament_logs_open
+              head :forbidden
+          end
+        end
+
+        unless challenge.user == current_user
           head :forbidden
         end
       end
