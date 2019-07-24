@@ -1,6 +1,7 @@
 class TournamentController < ApplicationController
-  before_action :set_tournament, only: [:show]
+  before_action :set_tournament, only: [:show, :show_spa]
   before_action :check_logged_in
+  before_action :set_tournaments, only: [:index, :index_spa]
   include ChallengeHelper
 
   def index
@@ -30,7 +31,7 @@ class TournamentController < ApplicationController
   end
 
   def index_spa
-    render json: (Tournament.all.map { |x|
+    render json: (@tournaments.map { |x|
       {
         id: x.id,
         name: x.name,
@@ -41,7 +42,7 @@ class TournamentController < ApplicationController
   end
 
   def show_spa
-    render json: ([Tournament.find(params[:id])].map { |x|
+    render json: (@tournament.map { |x|
       {
           id: x.id,
           name: x.name,
@@ -60,5 +61,17 @@ class TournamentController < ApplicationController
 
   def set_tournament
     @tournament = Tournament.find(params[:id])
+    if @tournament.hidden and not is_admin?
+      head :forbidden
+    end
+  end
+
+  def set_tournaments
+    @tournaments =
+      if is_admin?
+       Tournament.all
+      else
+        Tournament.where(hidden: false)
+      end
   end
 end
