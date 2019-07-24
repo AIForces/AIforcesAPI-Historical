@@ -67,11 +67,10 @@ class TournamentController < ApplicationController
   end
 
   def set_tournaments
-    @tournaments =
       if is_admin?
-       Tournament.all
+        @tournaments = Tournament.all
       else
-        Tournament.where(hidden: false)
+        @tournaments = Tournament.where(hidden: false)
       end
   end
 end
