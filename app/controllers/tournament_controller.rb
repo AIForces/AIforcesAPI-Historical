@@ -42,7 +42,7 @@ class TournamentController < ApplicationController
   end
 
   def show_spa
-    render json: (@tournament.map { |x|
+    render json: ([@tournament].map { |x|
       {
           id: x.id,
           name: x.name,
