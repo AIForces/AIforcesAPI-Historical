@@ -19,7 +19,10 @@ module Judge
     end
     if par[:winner] == -1
       cur_challenge.is_draw = 1
+    else
+      cur_challenge.is_draw = 0
     end
+    
     Rails.logger.debug("going to save")
     cur_challenge.save
     redis = Redis.new
