@@ -6,9 +6,9 @@ Rails.application.routes.draw do
   match 'submissions/:id/make_public', to: 'submissions#make_opened', via: :post
   match 'submissions/:id/make_primary', to: 'submissions#make_used_for_tours', via: :post
 
-  get 'event/rules', to: 'event#rules_spa'
-  get 'event/statements', to: 'event#statements_spa'
-  get 'event/visualizer', to: 'event#visualizer_spa'
+  get 'event/rules', to: 'event#rules'
+  get 'event/statements', to: 'event#statements'
+  get 'event/visualizer', to: 'event#visualizer'
   get 'event/participants', to: 'event#participants'
 
   get 'challenges', to: 'challenge#index'
