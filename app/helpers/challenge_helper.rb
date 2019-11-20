@@ -47,7 +47,7 @@ module ChallengeHelper
   end
 
   def get_data_for_index (challenges, keys)
-    @challenges_data = (challenges.map { |x| get_info_ch ({
+    @challenges_data = (challenges.map { |x| get_info_ch({
         challenge: x,
         keys: keys
     })})
