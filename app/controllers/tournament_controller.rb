@@ -1,36 +1,10 @@
 class TournamentController < ApplicationController
-  before_action :set_tournament, only: [:show, :show_spa]
+  before_action :set_tournament, only: [:show]
   before_action :check_logged_in
-  before_action :set_tournaments, only: [:index, :index_spa]
+  before_action :set_tournaments, only: [:index]
   include ChallengeHelper
 
   def index
-  end
-
-  def show
-    @challenges_data = get_data_for_index @tournament.challenges, nil
-  end
-
-  def new
-    if current_user == nil or current_user.role != 'admin'
-      head :forbidden
-    end
-  end
-
-  def create
-    if current_user == nil or current_user.role != 'admin'
-      head :forbidden
-    end
-
-    par = tournament_params
-    par[:participants] = User.where.not(fav_tours_id: nil).map {|x| x.id}
-    @tournament = Tournament.create(par)
-    if @tournament.save
-      redirect_to tournament_index_url
-    end
-  end
-
-  def index_spa
     render json: (@tournaments.map { |x|
       {
         id: x.id,
@@ -41,7 +15,7 @@ class TournamentController < ApplicationController
     })
   end
 
-  def show_spa
+  def show
     render json: ([@tournament].map { |x|
       {
           id: x.id,

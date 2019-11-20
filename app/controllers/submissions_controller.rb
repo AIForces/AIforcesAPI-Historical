@@ -1,35 +1,17 @@
 class SubmissionsController < ApplicationController
   before_action :check_logged_in #, only: [:create, :index, :new, :show, :source, :manage, :destroy]
-  # before_action :check_logged_in_api, only: [:create_spa, :make_used_for_tours, :make_opened, :index_spa, :show_spa]
-  before_action :set_submission, only: [:source, :show_spa]
+  before_action :set_submission, only: [:source, :show]
   before_action :check_submission_id, only: [:source]
   before_action :check_admin, only: [:manage, :destroy]
   include SubmissionsHelper
 
-
   def create
-    @submission = current_user.submissions.create(submission_params)
-    if @submission.save
-      redirect_to submissions_index_url
-    end
-  end
-
-  def create_spa
     @submission = current_user.submissions.create(submission_params)
     if @submission.save
       head :ok
     else
       render json: { errors: @submission.errors.full_messages }, status: :bad_request
     end
-  end
-
-  def index
-  end
-
-  def new
-  end
-
-  def show
   end
 
   def make_used_for_tours
@@ -46,18 +28,6 @@ class SubmissionsController < ApplicationController
     head :ok
   end
 
-  def source
-    @needed_id = params[:id]
-  end
-
-  def manage
-  end
-
-  def destroy
-    Submission.find(params[:id]).destroy
-    redirect_to submissions_manage_url
-  end
-
   def make_opened
     x = current_user.submissions.find(params[:id])
     x.opened = true
@@ -65,16 +35,16 @@ class SubmissionsController < ApplicationController
     head :ok
   end
 
-  def index_spa
+  def index
     render json: (current_user.submissions.map { |x|
-      get_info ({
+      get_info({
           submission: x,
           keys: params[:keys]
       })})
   end
 
-  def show_spa
-    render json: (get_info ({
+  def show
+    render json: (get_info({
       submission: @submission,
       keys: params[:keys]
     }))

@@ -1,17 +1,5 @@
 class EventController < ApplicationController
-  def index
-  end
-
   def rules
-    @rules_html = File.read("storage/events/#{current_event.name}/#{current_event.rules_file}")
-  end
-
-  def statements
-    g = current_event.game
-    @statement_html = File.read("storage/games/#{g.name}/#{g.statement_file}")
-  end
-
-  def rules_spa
     html = File.read("storage/events/#{current_event.name}/#{current_event.rules_file}")
     render json: {
         html: html,
@@ -19,7 +7,7 @@ class EventController < ApplicationController
     }
   end
 
-  def statements_spa
+  def statements
     g = current_event.game
     html = File.read("storage/games/#{g.name}/#{g.statement_file}")
     css = File.read("storage/games/#{g.name}/statement.css")
@@ -30,7 +18,8 @@ class EventController < ApplicationController
     }
   end
 
-  def visualizer_spa
+  # TODO: TRON hardcoded
+  def visualizer
     vis_html = File.read("storage/games/tron/visualizer/visualizer.html")
     vis_css = File.read("storage/games/tron/visualizer/visualizer.css")
     vis_js = File.read("storage/games/tron/visualizer/visualizer.js")

@@ -20,16 +20,6 @@ class ChallengeController < ApplicationController
         level: par[:level].to_i
     })
 
-    @challenge.save
-    redirect_to challenge_index_url
-  end
-
-  def create_spa
-    par = challenge_params
-    @challenge = current_user.challenges.create(sub1: par[:sub1].to_i, sub2: par[:sub2].to_i, state_par: {
-        level: par[:level].to_i
-    })
-
     if @challenge.save
       head :ok
     else
@@ -119,12 +109,12 @@ class ChallengeController < ApplicationController
     redirect_to challenge_manage_url
   end
 
-  def index_spa
+  def index
     render json: (get_data_for_index current_user.challenges, params[:keys])
   end
 
-  def show_spa
-    render json: (get_info_ch ({
+  def show
+    render json: (get_info_ch({
         challenge: @challenge,
         keys: params[:keys]}))
   end
