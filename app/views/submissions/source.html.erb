@@ -1,9 +1,0 @@
-<h1 class="title">Посылка <%= @submission.id %></h1>
-<div class="content box">
-  <pre><code class="hljs"><%= @submission.code %></code></pre>
-</div>
-<script>
-    $(document).ready(function() {
-        $('pre code').each(function(i, e) {hljs.highlightBlock(e)});
-    });
-</script>
