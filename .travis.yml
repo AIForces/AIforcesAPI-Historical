@@ -5,9 +5,8 @@ rvm:
 - jruby-19mode
 - rbx-2
 
-before_install:
-  - gem update --system
 
 script:
+  - gem update --system
   - bundle exec rake db:setup
   - bundle exec rake spec
