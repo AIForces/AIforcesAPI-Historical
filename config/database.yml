@@ -16,10 +16,11 @@
 #
 default: &default
   adapter: postgresql
-  encoding: unicode
-  # For details on connection pooling, see Rails configuration guide
-  # http://guides.rubyonrails.org/configuring.html#database-pooling
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  database: backbone_data_bootstrap_development
+  min_messages: WARNING
+  pool: 5
+  username: postgres
+  host: db
 
 development:
   <<: *default
